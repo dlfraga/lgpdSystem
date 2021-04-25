@@ -8,7 +8,7 @@ class UserController {
         try {
             await User.firstOrFail();
         } catch (error) {
-            session.flash({ notification: 'Nenhum login no sistema! Redirecionando..' })
+            session.flash({ notification: 'Nenhum login no sistema! Por favor crie um novo admin' })
             return response.redirect('/createNewAdmin')
         }
         try {

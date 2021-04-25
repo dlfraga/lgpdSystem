@@ -2,71 +2,76 @@
 <html lang="pr-BT">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>Login</title>
-    {{ style('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css') }}
-    {{ style('https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css') }}
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  {{ style('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css') }}
+  {{ style('https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css') }}
+  {{ script('validations.js') }}
 </head>
 
 <body>
-    <section class="section">
-        <div class="container">
-            <div class="logo"></div>
-            <div class="title">
-                Novo administrador
-            </div>
-            <div class="subtitle">
-                @loggedIn
-                <h2> Você já tem uma sessão logada </h2>
-                @else
-                <p>Nesta tela você pode criar um novo login administrador</p>
-                <div class="loginBox">
-                    <form action="/store" method="POST">
-                        {{ csrfField() }}
-                        <section class="section">
-                            <div class="container">
-                              <div class="columns is-centered">
-                                <div class="column is-5 is-4-desktop">
-                                  <form>
-                                    <div class="field">
-                                      <div class="control">
-                                        <input class="input" type="text" placeholder="Nome" name="username">
-                                      </div>
-                                    </div>
-                                    <div class="field">
-                                      <div class="control">
-                                        <input class="input" type="email" placeholder="Email" name="email">
-                                      </div>
-                                    </div>
-                                    <div class="field">
-                                      <div class="control">
-                                        <input class="input" type="password" placeholder="Senha" name="password">
-                                      </div>
-                                    </div>
-                                    <div class="field">
-                                      <div class="control">
-                                        <input class="input" type="password" placeholder="Digite a senha novamente">
-                                      </div>
-                                    </div>
-                                    <div class="field">
-                                      <div class="control">
-                                        <button class="button is-primary is-fullwidth">Registrar</button>
-                                      </div>
-                                    </div>
-                                  </form>
-                                </div>
-                              </div>
-                            </div>
-                          </section>
-                @endloggedIn
-            </div>
+  <section class="section">
+    <div class="container">
+      <div class="logo"></div>
+      <div class="title">
+        Novo administrador
+      </div>
+      <div class="subtitle">
+        @loggedIn
+        <h2> Você já tem uma sessão logada </h2>
+        @else
+        <p>Nesta tela você pode criar um novo login administrador</p>
+        <div class="loginBox">
+          <form action="/store" method="POST">
+            {{ csrfField() }}
+            <section class="section">
+              <div class="container">
+                <div class="columns is-centered">
+                  <div class="column is-5 is-4-desktop">
+                    <form>
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" type="text" placeholder="Nome" name="username">
+                        </div>
+                      </div>
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" type="email" placeholder="Email" name="email">
+                        </div>
+                      </div>
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" id="password" type="password" placeholder="Senha" name="password" required>
+                        </div>
+                      </div>
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" id="confirm_password" type="password" placeholder="Digite a senha novamente" required>
+                        </div>
+                      </div>
+                      <div class="field">
+                        <div class="control">
+                          <button class="button is-primary is-fullwidth">Registrar</button>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="is-half">
+                      @if(old('notification'))
+                      <div class="notification is-success">
+                        {{ old('notification') }}
+                        @endif
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            @endloggedIn
         </div>
-    </section>
-    @if(old('notification'))
-    <div class="notification is-success">
-        {{ old('notification') }}
-    </div>
-@endif
+      </div>
+  </section>
+
+
 </body>
 
 </html>

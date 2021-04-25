@@ -20,7 +20,7 @@ Route.on('/').render('index')
 Route.post('/login', 'UserController.login').middleware('guest');
 Route.post('/store', 'UserController.store').middleware('guest');
 Route.get('users/:id', 'UserController.show').middleware('auth');
-Route.get('/fogout', 'UserController.logout');
+Route.get('/logout', 'UserController.logout');
 Route.on('/createNewAdmin').render('createnewadmin')
 Route.on('/dashboard').render('dashboard').middleware('auth');
 Route.on('/fluxos').render('fluxos').middleware('auth');
