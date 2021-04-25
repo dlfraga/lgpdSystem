@@ -1,0 +1,23 @@
+<nav class="navbar">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/dashboard">Dashboard</a>
+            <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false"><span
+                    aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="/fluxos">Fluxos</a>
+                <a class="navbar-item" href="/solicitacoes">Solicitações de informações</a>
+                <a class="navbar-item" href="/perfil">Meu perfil</a>
+                <a class="navbar-item" href="/administracao">Administração</a>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">Olá {{ auth.user.username }} </div>
+                <div class="navbar-item">
+                    <div class="buttons"><a class="button is-light" href="/logout">Logout</a>
+                        <!-- <a class="button is-primary" href="#">Sign up</a></div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+</nav>

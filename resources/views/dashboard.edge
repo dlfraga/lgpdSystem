@@ -1,0 +1,84 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    {{ style('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css') }}
+    {{ style('https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css') }}
+    {{ script('dashboard.js') }}
+</head>
+
+
+<body>
+
+    <div>
+    </div>
+    @include('menu')
+    <section class="section">
+        <div class="container">
+            <h2 class="title">Status</h2>
+            <p class="subtitle">Lista de fluxos e pedidos de informações</p>
+            <div class="columns has-text-centered ">
+                <div class="column is-quarter">
+                    <div class="box has-background-primary">
+                        <h3 class="title is-2 has-text-black">0</h3>
+                        <p class="subtitle has-text-blue">Fluxos totais</p>
+                    </div>
+                </div>
+                <div class="column is-quarter">
+                    <div class="box has-background-danger">
+                        <h3 class="title is-2 has-text-black">0</h3>
+                        <p class="subtitle has-text-green">Concluídos</p>
+                    </div>
+                </div>
+                <div class="column is-quarter">
+                    <div class="box has-background-danger">
+                        <h3 class="title is-2 has-text-black">0</h3>
+                        <p class="subtitle has-text-green">Solicitações em aberto</p>
+                    </div>
+                </div>
+                <div class="column is-quarter">
+                    <div class="box has-background-danger">
+                        <h3 class="title is-2 has-text-black">0</h3>
+                        <p class="subtitle has-text-green">Solicitações concluídas</p>
+                    </div>
+                </div>
+            </div>
+            <table class="table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th scope="col">ID #</th>
+                        <th scope="col">Nome do processo</th>
+                        <th scope="col">Origem</th>
+                        <th scope="col">Destino</th>
+                        <th class="has-text-centered" scope="col">Status</th>
+                        <th class="has-text-centered" scope="col">Autor</th>
+                        <th class="has-text-centered" scope="col">Data de inclusão</th>
+                        <th class="has-text-centered" scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <a href="#">
+                                <div class="media">
+                                    <div class="media-content">Processo 1</div>
+                                </div>
+                            </a>
+                        </td>
+                        <td>Site das.com.br</td>
+                        <td>Cadastro de newsletter</td>
+                        <td class="has-text-centered"><span class="tag is-warning">Incompleto</span></td>
+                        <td class="has-text-centered">Vanessa Wilmut</td>
+                        <td class="has-text-centered">21-03-2021</td>
+                        <td class="has-text-centered"><a href="#">Editar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</body>
+
+</html>

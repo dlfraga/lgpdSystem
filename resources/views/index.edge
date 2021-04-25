@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pr-BT">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    {{ style('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css') }}
+    {{ style('https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css') }}
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="logo"></div>
+
+            <div class="subtitle">
+                @loggedIn
+                <h2> Olá {{ auth.user.username }} </h2>
+                @else
+
+                <div class="loginBox">
+                    <form action="/login" method="POST">
+                        {{ csrfField() }}
+
+
+
+                        <section class="section">
+                            <div class="container has-text-centered">
+                                <div class="title">
+                                    lgpdSystem
+                                </div>
+                                <p class="subtitle">Você não está logado. Por favor realize o Login no sistema</p>
+                                <div class="columns is-centered">
+
+                                    <div class="column is-5 is-4-desktop">
+
+                                        <div class="field">
+                                            <div class="control">
+                                                <input class="input" type="email" name="email" placeholder="Email">
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="control">
+                                                <input class="input" type="password" name="password" placeholder="Senha">
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <button class="button is-primary is-light is-fullwidth">Login</button>
+                                        </div>
+
+                    </form>
+                    @if(old('notification'))
+                    <div class="notification is-failure">
+                        {{ old('notification') }}
+                    </div>
+                    @endif
+                    @if(old('error'))
+                    <div class="notification is-danger">
+                        {{ flashMessage('error') }}
+                    </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+    </form>
+    </div>
+    @endloggedIn
+
+    </div>
+    </div>
+    </section>
+
+</body>
+
+</html>
