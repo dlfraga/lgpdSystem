@@ -1,13 +1,13 @@
 'use strict'
 
 const Fluxo = use('App/models/Fluxo')
-const Database = use('Database');
+const User = use('App/Models/User')
 
 class FluxoController {
-    async index({ view, auth }) {                
-        const fluxos = await Database.from('fluxos').where('user_id', auth.user.id);
-        console.log(fluxos);
-        return view.render('meusFluxos', {fluxos: fluxos})        
+    async index({ view, auth }) {
+        const currentUser = await User.find(auth.user.id);               
+        const fluxos = await currentUser.fluxos().fetch();
+        return view.render('meusFluxos', {fluxos: fluxos.toJSON()})        
     }
 
     async store({ request, response, session, auth }) {
