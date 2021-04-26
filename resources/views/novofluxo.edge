@@ -13,91 +13,114 @@
     </div>
     @include('menu')
     <section class="section">
-
-        <div class="container is-fluid">
-            <div class="columns is-fullwidth is-centered">
-                <div class="column is-half is-half">
-                    <div class="title">Novo fluxo</div>
-                    <div class="field">
-                        <label class="label" for="">Label for text</label>
-                        <div class="control">
-                            <input class="input" type="text" name="field-name" placeholder="Write a text">
+        <form action="/fluxos" method="POST">
+            {{ csrfField() }}
+            <div class="container is-fluid">
+                <div class="columns is-fullwidth is-centered">
+                    <div class="column is-half">
+                        <div class="title">Novo fluxo</div>
+                        <div class="field">
+                            <label class="label" for="">Nome do processo de negócio</label>
+                            <div class="control">
+                                <input class="input" type="text" name="nomedoprocesso"
+                                    placeholder="Digite um nome para identificar o processo de negócio" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="field">
-                        <label class="label" for="">Label for text</label>
-                        <div class="control">
-                            <input class="input" type="text" name="field-name" placeholder="Write a text">
+                        <div class="field">
+                            <label class="label" for="">Fonte dos dados pessoais</label>
+                            <div class="control">
+                                <input class="input" type="text" name="fontedodado"
+                                    placeholder="Digite como as informações entram na empresa" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="field">
-                        <label class="label" for="">Label for textarea</label>
-                        <div class="control"><textarea class="textarea" name="field-name" rows="3"
-                                placeholder="Write something..."></textarea></div>
-                    </div>
-
-                    <div class="field">
-                        <label class="label" for="">Label for text</label>
-                        <div class="control">
-                            <input class="input" type="text" name="field-name" placeholder="Write a text">
+                        <div class="field">
+                            <label class="label" for="">Informações coletadas</label>
+                            <div class="control"><textarea class="textarea" name="informacoescoletadas" rows="3"
+                                    placeholder="Escreva quais são as informações coletadas"></textarea></div>
                         </div>
-                    </div>
 
-                    <div class="field">
-                        <label class="label" for="">Label for text</label>
-                        <div class="control">
-                            <input class="input" type="text" name="field-name" placeholder="Write a text">
+                        <div class="field">
+                            <label class="label" for="">Razão</label>
+                            <div class="control">
+                                <input class="input" type="text" name="razao"
+                                    placeholder="Descreva para que estas informações são usadas">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="field">
-                        <label class="label" for="">Label for textarea</label>
-                        <div class="control"><textarea class="textarea" name="field-name" rows="3"
-                                placeholder="Write something..."></textarea></div>
-                    </div>
-
-                    <div class="field">
-                        <label class="label" for="">Label for textarea</label>
-                        <div class="control"><textarea class="textarea" name="field-name" rows="3"
-                                placeholder="Write something..."></textarea></div>
-                    </div>
-
-                    <div class="field">
-                        <label class="label" for="">Label for text</label>
-                        <div class="control">
-                            <input class="input" type="text" name="field-name" placeholder="Write a text">
+                        <div class="field">
+                            <label class="label" for="">Como é armazenado</label>
+                            <div class="control">
+                                <input class="input" type="text" name="comoearmazenado"
+                                    placeholder="As informações coletadas são armazenadas? Como?">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="field">
-                        <label class="label" for="">Label for text</label>
-                        <div class="control">
-                            <input class="input" type="text" name="field-name" placeholder="Write a text">
+                        <div class="field">
+                            <label class="label" for="">Mecanismos de Proteção</label>
+                            <div class="control"><textarea class="textarea" name="protecao" rows="3"
+                                    placeholder="Descreva quais são as medidas de proteção utilizadas para manter a informação segura"></textarea>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="field">
-                        <div class="control">
-                            <label class="checkbox form-check-label" for="">
-                                <input type="checkbox" name="field-name" value="example value" checked="">
-                                <span class="ml-1">Check me out</span>
-                            </label>
+                        <div class="field">
+                            <label class="label" for="">Medidas de segurança</label>
+                            <div class="control"><textarea class="textarea" name="seguranca" rows="3"
+                                    placeholder="O acesso a informação é limitado? Quem tem acesso?"></textarea></div>
                         </div>
-                    </div>
 
-                    <div class="field">
-                        <div class="control">
-                            <label class="checkbox form-check-label" for="">
-                                <input type="checkbox" name="field-name" value="example value" checked="">
-                                <span class="ml-1">Check me out</span>
-                            </label>
+                        <div class="field">
+                            <label class="label" for="">Prazo de eliminação</label>
+                            <div class="control">
+                                <input class="input" type="text" name="field-name"
+                                    placeholder="Quando as informações são eliminadas?">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="">Justificativa da LGPD</label>
+                            <div class="control">
+                                <input class="input" type="text" name="justificativa"
+                                    placeholder="Qual é a justificativa de obter a informação, considerando as previstas na LGPD?">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <label class="checkbox form-check-label" for="menoresdeidade">
+                                    <input type="checkbox" id="menoresdeidade" name="menoresdeidade" value="true">
+                                    <span class="ml-1">Os dados incluem informações de menores de idade?</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <label class="checkbox form-check-label" for="dadossensiveis">
+                                    <input type="checkbox" id="dadossensiveis" name="dadossensiveis" value="true">
+                                    <span class="ml-1">São obtidos dados sensíveis?</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="columns is-centered is-half">
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-primary is-fullwidth">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="is-half">
+            @if(old('notification'))
+            <div class="notification is-success">
+              {{ old('notification') }}
+              @endif
+            </div>
+          </div>
     </section>
 
 </body>

@@ -18,8 +18,8 @@ const Route = use('Route')
 
 Route.on('/').render('index')
 Route.on('/createNewAdmin').render('createnewadmin')
-Route.on('/dashboard').render('dashboard').middleware('auth');
-Route.on('/meusFluxos').render('meusfluxos').middleware('auth');
+Route.get('/dashboard', 'DashboardController.index').middleware('auth');
+Route.get('/meusFluxos', 'FluxoController.index').middleware('auth');
 Route.on('/novoFluxo').render('novofluxo').middleware('auth');
 
 Route.get('users/:id', 'UserController.show').middleware('auth');

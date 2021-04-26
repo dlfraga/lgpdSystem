@@ -29,19 +29,19 @@
             @each(fluxo in fluxos)
             <tbody>
                 <tr>
-                    <td>fluxo.id</td>
+                    <td>{{fluxo.id}}</td>
                     <td>
                         <a href="#">
                             <div class="media">
-                                <div class="media-content">fluxo.nomedoprocesso</div>
+                                <div class="media-content">{{fluxo.nomedoprocesso}}</div>
                             </div>
                         </a>
                     </td>
-                    <td>fluxo.fontedodado</td>
-                    <td>fluxo.razao</td>
+                    <td>{{fluxo.fontedodado}}</td>
+                    <td>{{fluxo.razao}}</td>
                     <td class="has-text-centered"><span class="tag is-warning">Incompleto</span></td>
                     <td class="has-text-centered">Desconhecido</td>
-                    <td class="has-text-centered">fluxo.created_at</td>
+                    <td class="has-text-centered">{{fluxo.created_at}}</td>
                     <td class="has-text-centered"><a href="#">Editar</a></td>
                 </tr>
             </tbody>
@@ -52,7 +52,13 @@
         </div>
 
 
-
+        <div class="is-half">
+            @if(old('notification'))
+            <div class="notification is-success">
+                {{ old('notification') }}
+                @endif
+            </div>
+        </div>
     </section>
 
 </body>

@@ -4,9 +4,8 @@
     <meta charset="UTF-8" />
     <title>Dashboard</title>
     {{ style('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css') }}
-    {{ style('https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css') }}
+    {{ style('https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css') }}
     {{ script('dashboard.js') }}
-    {{ script('validations.js') }}
 </head>
 
 
@@ -22,30 +21,49 @@
             <div class="columns has-text-centered ">
                 <div class="column is-quarter">
                     <div class="box has-background-primary">
-                        <h3 class="title is-2 has-text-black">0</h3>
-                        <p class="subtitle has-text-blue">Fluxos totais</p>
+                        @if(fluxosCount == 0)
+                        <h3 class="title is-2 has-text-white">0</h3>
+                        @else
+                        <h3 class="title is-2 has-text-white">
+                            {{fluxosCount}}
+                        </h3>
+                        @endif
+                        <p class="subtitle has-text-white">Fluxos totais</p>
                     </div>
                 </div>
                 <div class="column is-quarter">
                     <div class="box has-background-danger">
-                        <h3 class="title is-2 has-text-black">0</h3>
-                        <p class="subtitle has-text-green">Concluídos</p>
+                        @if(fluxosConcluidos == 0)
+                        <h3 class="title is-2 has-text-white">0</h3>
+                        @else
+                        <h3 class="title is-2 has-text-white">
+                            {{fluxosConcluidos}}
+                        </h3>
+                        @endif
+                        <p class="subtitle has-text-white">Concluídos</p>
+                    </div>
+                </div>
+                <div class="column is-quarter">
+                    <div class="box has-background-primary">
+                        <h3 class="title is-2 has-text-white">0</h3>
+                        <p class="subtitle has-text-white">Solicitações concluídas</p>
                     </div>
                 </div>
                 <div class="column is-quarter">
                     <div class="box has-background-danger">
-                        <h3 class="title is-2 has-text-black">0</h3>
-                        <p class="subtitle has-text-green">Solicitações em aberto</p>
+                        <h3 class="title is-2 has-text-white">0</h3>
+                        <p class="subtitle has-text-white">Solicitações em aberto</p>
                     </div>
                 </div>
-                <div class="column is-quarter">
-                    <div class="box has-background-danger">
-                        <h3 class="title is-2 has-text-black">0</h3>
-                        <p class="subtitle has-text-green">Solicitações concluídas</p>
-                    </div>
-                </div>
-            </div>         
+            </div>
         </div>
+        <div class="is-half">
+            @if(old('notification'))
+            <div class="notification is-success">
+              {{ old('notification') }}
+              @endif
+            </div>
+          </div>
     </section>
 
 </body>
