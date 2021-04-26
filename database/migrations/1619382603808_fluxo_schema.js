@@ -16,8 +16,8 @@ class FluxoSchema extends Schema {
       table.string('seguranca')
       table.string('prazodeeliminacao')
       table.string('justificativa')
-      table.boolean('menoresdeidade')
-      table.boolean('dadossensiveis')
+      table.string('menoresdeidade')
+      table.string('dadossensiveis')
       table.timestamps()
     })
   }
