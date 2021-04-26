@@ -9,7 +9,6 @@ class FluxoSchema extends Schema {
       table.increments()
       table.string('nomedoprocesso', 254)
       table.string('fontedodado', 254)
-      table.
       table.string('informacoescoletadas')
       table.string('razao')
       table.string('comoearmazenado')
@@ -17,8 +16,8 @@ class FluxoSchema extends Schema {
       table.string('seguranca')
       table.string('prazodeeliminacao')
       table.string('justificativa')
-      table.string('menoresdeidade')
-      table.string('dadossensiveis')
+      table.boolean('menoresdeidade')
+      table.boolean('dadossensiveis')
       table.timestamps()
     })
   }

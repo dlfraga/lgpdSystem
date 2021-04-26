@@ -17,11 +17,18 @@
 const Route = use('Route')
 
 Route.on('/').render('index')
-Route.post('/login', 'UserController.login').middleware('guest');
-Route.post('/store', 'UserController.store').middleware('guest');
-Route.get('users/:id', 'UserController.show').middleware('auth');
-Route.get('/logout', 'UserController.logout');
 Route.on('/createNewAdmin').render('createnewadmin')
 Route.on('/dashboard').render('dashboard').middleware('auth');
-Route.on('/fluxos').render('fluxos').middleware('auth');
+Route.on('/meusFluxos').render('meusfluxos').middleware('auth');
 Route.on('/novoFluxo').render('novofluxo').middleware('auth');
+
+Route.get('users/:id', 'UserController.show').middleware('auth');
+
+Route.post('/login', 'UserController.login').middleware('guest');
+Route.post('/store', 'UserController.store').middleware('guest');
+
+Route.get('/logout', 'UserController.logout').middleware('auth');
+
+Route.resource('fluxos', 'FluxoController').middleware('auth');
+
+
