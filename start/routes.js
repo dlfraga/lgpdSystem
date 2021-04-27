@@ -29,6 +29,8 @@ Route.post('/store', 'UserController.store').middleware('guest');
 
 Route.get('/logout', 'UserController.logout').middleware('auth');
 
+/**Resourcer=>  */
 Route.resource('fluxos', 'FluxoController').middleware('auth');
+Route.resource('solicitacoes', 'SolicitacoesController');
 
 
