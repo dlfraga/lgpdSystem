@@ -1,0 +1,87 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Fluxos</title>
+    {{ style('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css') }}
+    {{ style('https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css') }}
+</head>
+
+<body>
+    <div>
+    </div>
+    @include('menu')
+    <div class="container is-fluid">
+        <section class="section">
+            <div class="container">
+                <h2 class="title">Solicitações LGPD</h2>
+                <p class="subtitle">Lista de solicitações abertas por titulares de dados</p>
+                <div class="columns has-text-centered">
+                    <div class="column is-3">
+                        <div class="box has-background-primary">
+                            <h3 class="title is-2 has-text-white">0</h3>
+                            <p class="subtitle has-text-white">Total</p>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="box has-background-danger">
+                            <h3 class="title is-2 has-text-white">0</h3>
+                            <p class="subtitle has-text-white">Respondidos</p>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="box has-background-success has-text-white">
+                            <h3 class="title is-2 has-text-white">1</h3>
+                            <p class="subtitle has-text-white">Concluídos</p>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="box has-background-warning">
+                            <h3 class="title is-2 has-text-white">1</h3>
+                            <p class="subtitle has-text-white">Pendente</p>
+                        </div>
+                    </div>
+                </div>
+                <table class="table is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID #</th>
+                            <th scope="col">Aberto por</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Assunto</th>
+                            <th class="has-text-centered" scope="col">Status</th>
+                            <th class="has-text-centered" scope="col">Setor</th>
+                            <th class="has-text-centered" scope="col">Data</th>
+                            <th class="has-text-centered" scope="col">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>348</td>
+                            <td>
+                                <a href="#">
+                                    <span class="tag is-light has-text-centered">Fulano da Silva</span>
+                                    <!-- {{--  <div class="media">
+                                        <div class="media-left">
+                                            <figure class="image is-32x32"><img class="is-rounded"
+                                                    src="https://shuffle.dev/placeholder/pictures/bg_circle.svg?primary=00d1b2"
+                                                    alt=""></figure>
+                                        </div>
+                                        <div class="media-content">Fulano da Silva</div>
+                                    </div>  --}} -->
+                                </a>
+                            </td>
+                            <td>fulado@gmail.com</td>
+                            <td>Eliminar minhas informações</td>
+                            <td class="has-text-centered"><span class="tag is-warning">Novo</span></td>
+                            <td class="has-text-centered">Marketing</td>
+                            <td class="has-text-centered">25-12-2021</td>
+                            <td class="has-text-centered"><a href="#">Responder</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+</body>
+
+</html>

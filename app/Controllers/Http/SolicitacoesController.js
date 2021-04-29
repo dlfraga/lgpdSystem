@@ -3,7 +3,7 @@
 class SolicitacaoController {
 
     async index({ view }) {                
-        return view.render('solicitacao', {  })
+        return view.render('solicitacoes', {  })
     }
 
 }
