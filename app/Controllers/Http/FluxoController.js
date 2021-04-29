@@ -7,7 +7,7 @@ class FluxoController {
     async index({ view, auth }) {
         const currentUser = await User.find(auth.user.id);               
         const fluxos = await currentUser.fluxos().fetch();
-        return view.render('meusFluxos', {fluxos: fluxos.toJSON()})        
+        return view.render('meusfluxos', {fluxos: fluxos.toJSON()})        
     }
 
     async store({ request, response, session, auth }) {
