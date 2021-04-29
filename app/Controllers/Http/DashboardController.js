@@ -1,5 +1,5 @@
 'use strict'
-const Fluxo = use('App/models/Fluxo')
+const Fluxo = use('App/Models/Fluxo')
 const Database = use('Database')
 
 class DashboardController {

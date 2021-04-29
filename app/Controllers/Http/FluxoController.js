@@ -1,6 +1,6 @@
 'use strict'
 
-const Fluxo = use('App/models/Fluxo')
+const Fluxo = use('App/Models/Fluxo')
 const User = use('App/Models/User')
 
 class FluxoController {
