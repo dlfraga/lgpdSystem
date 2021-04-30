@@ -27,6 +27,13 @@ class ExceptionHandler extends BaseExceptionHandler {
       response.redirect('/')
       return
     }
+
+    if (error.name === 'E_ROUTE_NOT_FOUND') {
+      session.flash({ error: 'Você não está logado ou sua sessão expirou. Realize login novamente' })
+      await session.commit()
+      //response.redirect('/')
+      return
+    }
     return super.handle(...arguments)
   }
   /**
