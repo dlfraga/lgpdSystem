@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Fluxos</title>
     @include('default_include')
+    {{style('https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.min.css')}}
 
 </head>
 
@@ -17,7 +18,14 @@
             <div class="container is-fluid">
                 <div class="columns is-fullwidth is-centered">
                     <div class="column is-half">
+                        <!-- <nav class="breadcrumb has-arrow-separator is-small" aria-label="breadcrumbs">
+                            <ul>
+                                <li><a href="#">Novo fluxo</a></li>
+                                <li class="is-active"><a href="#" aria-current="page">Nome do processo</a></li>
+                            </ul>
+                        </nav> -->
                         <div class="title">Novo fluxo</div>
+
                         <div class="field">
                             <label class="label" for="">Nome do processo de negócio</label>
                             <div class="control">
@@ -26,19 +34,40 @@
                             </div>
                         </div>
 
+                        <article class="message is-info">
+                            <div class="message-body">
+                                O processo de tratamento de dados pessoais sempre deve servir a um processo de negócio
+                                da empresa. Coloque um nome que identifique em qual processo os dados pessoais estão
+                                sendo utilizados, por exemplo <strong> "Inclusão de funcionário"</strong> ou
+                                <strong>"Inscrição em curso"</strong>.
+                            </div>
+                        </article>
+
                         <div class="field">
                             <label class="label" for="">Fonte dos dados pessoais</label>
-                            <div class="control">
-                                <input class="input" type="text" name="fontedodado"
-                                    placeholder="Digite como as informações entram na empresa" required>
+                            <div class="">
+                                <input class="input" type="text" name="fontedodado" id="fontedodado" required>
                             </div>
                         </div>
+
+                        <article class="message is-info">
+                            <div class="message-body">
+                                Adicione a fonte dos dados pessoais deste fluxo. Exemplos de fontes comuns: inscrição de
+                                newsletter no site x, whatsapp, e-mail e ficha de cadastro de novo funcionário.
+                            </div>
+                        </article>
 
                         <div class="field">
                             <label class="label" for="">Informações coletadas</label>
                             <div class="control"><textarea class="textarea" name="informacoescoletadas" rows="3"
                                     placeholder="Escreva quais são as informações coletadas"></textarea></div>
                         </div>
+
+                        <article class="message is-info">
+                            <div class="message-body">
+                                Selecione quais são as informações coletadas neste fluxo.
+                            </div>
+                        </article>
 
                         <div class="field">
                             <label class="label" for="">Razão</label>
@@ -116,12 +145,14 @@
         <div class="is-half">
             @if(old('notification'))
             <div class="notification is-success">
-              {{ old('notification') }}
-              @endif
+                {{ old('notification') }}
+                @endif
             </div>
-          </div>
+        </div>
     </section>
-
+    {{ script('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js') }}
+    {{ script ('https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.js')}}
+    {{ script('/scripts/general.js') }}
 </body>
 
 </html>

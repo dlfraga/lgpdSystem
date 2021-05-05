@@ -2,12 +2,13 @@
 
 const Fluxo = use('App/Models/Fluxo')
 const User = use('App/Models/User')
+const FonteDadosFluxo = use('App/Models/FonteDadosFluxo.js')
 
 class FluxoController {
     async index({ view, auth }) {
         const currentUser = await User.find(auth.user.id);               
         const fluxos = await currentUser.fluxos().fetch();
-        return view.render('meusfluxos', {fluxos: fluxos.toJSON()})        
+        return view.render('meusfluxos', {fluxos: fluxos.toJSON()})       
     }
 
     async store({ request, response, session, auth }) {
@@ -36,9 +37,12 @@ class FluxoController {
         }
 
         await fluxo.save()
-        session.flash({ error: 'Fluxo salvo com sucesso!' })
+        session.flash({ success: 'Fluxo salvo com sucesso!' })
         return response.redirect('/meusFluxos')
     }
+
+    
+
 }
 
 module.exports = FluxoController

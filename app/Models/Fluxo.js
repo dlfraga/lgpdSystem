@@ -7,6 +7,10 @@ class Fluxo extends Model {
     user() {
         return this.belongsTo('App/Models/User')
     }
+
+    fonteDadosFluxo() {
+        return this.hasOne('App/Models/FonteDadosFluxo')
+    }
 }
 
 module.exports = Fluxo

@@ -32,5 +32,9 @@ Route.get('/logout', 'UserController.logout').middleware('auth');
 /**Resourcer=>  */
 Route.resource('fluxos', 'FluxoController').middleware('auth');
 Route.resource('solicitacoes', 'SolicitacoesController');
+Route.resource('fonteDadosFluxo/:nome?', 'FontedadosfluxoController');
+
+
+
 
 
