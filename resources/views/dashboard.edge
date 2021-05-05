@@ -9,13 +9,8 @@
 
 
 <body>
-
-    <div>
-    </div>
     @include('menu')
 
-
-</body>
 <div class="container is-fluid">
     <section class="section">
         <div class="container">
@@ -44,7 +39,7 @@
                         </div>
                         <div class="column is-12-mobile is-6-tablet">
                             <div class="box">
-                                <h3 class="title is-4">Fluxos incompletos</h3>
+                                <h3 class="title is-4">Fluxos completos</h3>
                                 <div class="media">
                                     <div class="media-left">
                                         <figure class="image is-48x48"><img src="/images/pause.svg" alt="">
@@ -104,15 +99,17 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="is-half">
-            @if(old('notification'))
-            <div class="notification is-success">
-                {{ old('notification') }}
-                @endif
+            <div class="is-half is-one-quarter">
+                @if(old('notification'))
+                <div class="notification is-success">
+                    {{ old('notification') }}
+                    @endif
+                </div>
             </div>
         </div>
+        
     </section>
 </div>
+</body>
 
 </html>

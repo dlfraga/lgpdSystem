@@ -16,8 +16,11 @@ $('#fontedodado').selectize({
     render: {
         option: function (item, escape) {
             console.log(item);
-            return '<div>' + escape(item.nome) + '</div>';
-        }
+            return '<div class="text">' + escape(item.nome) + '</div>';
+        },
+        // option_create: function(data, escape){
+        //     return '<div class="text"> Adicionar a fonte '+ escape(data.input) + '</div>';
+        // },
     },
     load: function (query, callback) {
         if (!query.length) return callback();

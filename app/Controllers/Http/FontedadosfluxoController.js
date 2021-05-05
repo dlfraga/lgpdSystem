@@ -18,7 +18,6 @@ class FontedadosfluxoController {
     }
 
     async store({ request, response }) {
-    
         const fontedadosfluxo = new FonteDadosFluxo();
         fontedadosfluxo.nome = request.input('nome')                      
         const fonteExists = await FonteDadosFluxo.findBy('nome', fontedadosfluxo.nome);

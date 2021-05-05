@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pr-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Meu Perfil</title>
+    @include('default_include')
+    {{ script('validations.js') }}
+</head>
+
+<body>
+    @loggedIn
+    <section class="section">
+        <div class="container">
+            <div class="logo"></div>
+            <div class="title">
+                Alterar informações do perfil
+            </div>
+            <div class="subtitle">
+                <p>Nesta tela você pode alterar as suas informações pessoais</p>
+                <div class="loginBox">
+                    <form action="/meuPerfil" method="POST">
+                        {{ csrfField() }}
+                        <section class="section">
+                            <div class="container">
+                                <div class="columns is-centered">
+                                    <div class="column is-5 is-4-desktop">
+                                        <form>
+                                            <div class="field">
+                                                <div class="control">
+                                                    <input class="input" type="text" placeholder="Nome" name="username" value="{{perfil.username}}">
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <div class="control">
+                                                    <input class="input" type="email" placeholder="Email" name="email" value="{{perfil.email}}">
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <div class="control">
+                                                    <input class="input" id="password" type="password"
+                                                        placeholder="Digite sua nova senha" name="password" required>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <div class="control">
+                                                    <input class="input" id="confirm_password" type="password"
+                                                        placeholder="Digite a senha novamente" required>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <div class="control">
+                                                    <button class="button is-primary is-fullwidth">Salvar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="field">
+                                            <div class="control">
+                                                <a class="button is-danger is-fullwidth" href="/dashboard">Cancelar</a>                                                
+                                            </div>
+                                        </div>
+                                        <div class="is-half">
+                                            @if(old('notification'))
+                                            <div class="notification is-success">
+                                                {{ old('notification') }}
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                </div>
+            </div>
+    </section>
+    @else
+    <div class="title">
+        Você não está logado ou sua sessão é inválida. Faça login novamente.
+    </div>
+    @endloggedIn
+</body>
+
+</html>
