@@ -17,7 +17,7 @@
 const Route = use('Route')
 
 Route.on('/').render('index')
-Route.on('/esqueciMinhaSenha').render('esqueciMinhaSenha').middleware('guest');
+Route.on('/esqueciMinhaSenha').render('esqueciminhaSenha').middleware('guest');
 Route.on('/createNewAdmin').render('createnewadmin')
 Route.on('/editarFluxo').render('editarFluxo').middleware('auth')
 Route.on('/novoFluxo').render('novofluxo').middleware('auth');
