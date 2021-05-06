@@ -1,0 +1,166 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Fluxos</title>
+    @include('default_include')
+    {{style('https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.min.css')}}
+
+</head>
+
+<body>
+    <div>
+    </div>
+    @include('menu')
+    <section class="section">
+        <form action="/fluxos/{{fluxoaeditar.id}}" method="POST">
+            {{ csrfField() }}
+            <div class="container is-fluid">
+                <div class="columns is-fullwidth is-centered">
+                    <div class="column is-half">
+                        <!-- <nav class="breadcrumb has-arrow-separator is-small" aria-label="breadcrumbs">
+                            <ul>
+                                <li><a href="#">Novo fluxo</a></li>
+                                <li class="is-active"><a href="#" aria-current="page">Nome do processo</a></li>
+                            </ul>
+                        </nav> -->
+                        <div class="title">Editar fluxo</div>
+
+                        <div class="field">
+                            <label class="label" for="">Nome do processo de negócio</label>
+                            <div class="control">
+                                <input class="input" type="text" name="nomedoprocesso"
+                                    placeholder="Digite um nome para identificar o processo de negócio"
+                                    value="{{fluxoaeditar.nomedoprocesso}}" required>
+                            </div>
+                        </div>
+
+                        <article class="message is-info">
+                            <div class="message-body">
+                                O processo de tratamento de dados pessoais sempre deve servir a um processo de negócio
+                                da empresa. Coloque um nome que identifique em qual processo os dados pessoais estão
+                                sendo utilizados, por exemplo <strong> "Inclusão de funcionário"</strong> ou
+                                <strong>"Inscrição em curso"</strong>.
+                            </div>
+                        </article>
+
+                        <div class="field">
+                            <label class="label" for="">Fonte dos dados pessoais</label>
+                            <div class="">
+                                <input class="input" type="text" name="fontedodado" id="fontedodado"
+                                    value="{{fluxoaeditar.fontedodado}}" required>
+                            </div>
+                        </div>
+
+                        <article class="message is-info">
+                            <div class="message-body">
+                                Adicione a fonte dos dados pessoais deste fluxo. Exemplos de fontes comuns: inscrição de
+                                newsletter no site x, whatsapp, e-mail e ficha de cadastro de novo funcionário.
+                            </div>
+                        </article>
+
+                        <div class="field">
+                            <label class="label" for="">Informações coletadas</label>
+                            <div class="control"><textarea class="textarea" name="informacoescoletadas" rows="3"
+                                    placeholder="Escreva quais são as informações coletadas">{{fluxoaeditar.informacoescoletadas}}</textarea>
+                            </div>
+                        </div>
+
+                        <article class="message is-info">
+                            <div class="message-body">
+                                Selecione quais são as informações coletadas neste fluxo.
+                            </div>
+                        </article>
+
+                        <div class="field">
+                            <label class="label" for="">Razão</label>
+                            <div class="control">
+                                <input class="input" type="text" name="razao"
+                                    placeholder="Descreva para que estas informações são usadas"
+                                    value="{{fluxoaeditar.razao}}">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="">Como é armazenado</label>
+                            <div class="control">
+                                <input class="input" type="text" name="comoearmazenado"
+                                    value="{{fluxoaeditar.comoearmazenado}}"
+                                    placeholder="As informações coletadas são armazenadas? Como?">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="">Mecanismos de Proteção</label>
+                            <div class="control"><textarea class="textarea" name="protecao" rows="3"
+                                    placeholder="Descreva quais são as medidas de proteção utilizadas para manter a informação segura">{{fluxoaeditar.protecao}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="">Medidas de segurança</label>
+                            <div class="control"><textarea class="textarea" name="seguranca" rows="3"
+                                    placeholder="O acesso a informação é limitado? Quem tem acesso?">{{fluxoaeditar.seguranca}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="">Prazo de eliminação</label>
+                            <div class="control">
+                                <input class="input" type="text" name="prazodeeliminacao"
+                                    value="{{fluxoaeditar.prazodeeliminacao}}"
+                                    placeholder="Quando as informações são eliminadas?">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="">Justificativa da LGPD</label>
+                            <div class="control">
+                                <input class="input" type="text" name="justificativa"
+                                    value="{{fluxoaeditar.justificativa}}"
+                                    placeholder="Qual é a justificativa de obter a informação, considerando as previstas na LGPD?">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <label class="checkbox form-check-label" for="menoresdeidade">
+                                    <input type="checkbox" id="menoresdeidade" name="menoresdeidade" value="true">
+                                    <span class="ml-1">Os dados incluem informações de menores de idade?</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <label class="checkbox form-check-label" for="dadossensiveis">
+                                    <input type="checkbox" id="dadossensiveis" name="dadossensiveis" value="true">
+                                    <span class="ml-1">São obtidos dados sensíveis?</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="columns is-centered is-half">
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-primary is-fullwidth">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="is-half">
+            @if(old('notification'))
+            <div class="notification is-success">
+                {{ old('notification') }}
+                @endif
+            </div>
+        </div>
+    </section>
+    {{ script('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js') }}
+    {{ script ('https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.js')}}
+    {{ script('/scripts/general.js') }}
+</body>
+
+</html>

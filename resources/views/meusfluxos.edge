@@ -11,56 +11,68 @@
     </div>
     @include('menu')
     <div class="container is-fluid">
-    <section class="section">
-        <div> <a class="button is-primary" href="/novoFluxo">Novo fluxo</a></div>
-        <table class="table is-fullwidth">
-            <thead>
-                <tr>
-                    <th scope="col">ID #</th>
-                    <th scope="col">Nome do processo</th>
-                    <th scope="col">Origem</th>
-                    <th scope="col">Razão</th>
-                    <th class="has-text-centered" scope="col">Status</th>
-                    <th class="has-text-centered" scope="col">Autor</th>
-                    <th class="has-text-centered" scope="col">Data de inclusão</th>
-                    <th class="has-text-centered" scope="col">Ações</th>
-                </tr>
-            </thead>
-            @each(fluxo in fluxos)
-            <tbody>
-                <tr>
-                    <td>{{fluxo.id}}</td>
-                    <td>
-                        <a href="#">
-                            <div class="media">
-                                <div class="media-content">{{fluxo.nomedoprocesso}}</div>
-                            </div>
-                        </a>
-                    </td>
-                    <td>{{fluxo.fontedodado}}</td>
-                    <td>{{fluxo.razao}}</td>
-                    <td class="has-text-centered"><span class="tag is-warning">Incompleto</span></td>
-                    <td class="has-text-centered">Desconhecido</td>
-                    <td class="has-text-centered">{{fluxo.created_at}}</td>
-                    <td class="has-text-centered"><a href="#">Editar</a></td>
-                </tr>
-            </tbody>
-            @else
-            <td>Sem fluxos criados!</td>
-            @endeach
-        </table>
-        </div>
+        <section class="section">
+            <div> <a class="button is-primary" href="/novoFluxo">Novo fluxo</a></div>
+            <table class="table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th scope="col">ID #</th>
+                        <th scope="col">Nome do processo</th>
+                        <th scope="col">Origem</th>
+                        <th scope="col">Razão</th>
+                        <th class="has-text-centered" scope="col">Status</th>
+                        <th class="has-text-centered" scope="col">Autor</th>
+                        <th class="has-text-centered" scope="col">Data de inclusão</th>
+                        <th class="has-text-centered" scope="col">Ações</th>
+                    </tr>
+                </thead>
+                @each(fluxo in fluxos)
+                <tbody>
+                    <tr>
+                        <td>{{fluxo.id}}</td>
+                        <td>
+                            <a href="/fluxos/{{fluxo.id}}">
+                                <div class="media">
+                                    <div class="media-content">{{fluxo.nomedoprocesso}}</div>
+                                </div>
+                            </a>
+                        </td>
+                        <td>{{fluxo.fontedodado}}</td>
+                        <td>
+                            @if(fluxo.razao == null)
+                            Não preenchido
+                            @else
+                            {{fluxo.razao}}
+                            @endif
+                        </td>
+
+                        @if(fluxo.razao == null || fluxo.justificativa == null || fluxo.comoearmazenado == null ||
+                        prazodeeliminacao == null || protecao == null)
+                        <td class="has-text-centered"><span class="tag is-warning">Incompleto</span></td>
+                        @else
+                        <td class="has-text-centered"><span class="tag is-sucess">Concluído</span></td>
+                        @endif
+                        <td class="has-text-centered">{{fluxo.user.username}}</td>
+                        <td class="has-text-centered">{{fluxo.created_at}}</td>
+                        <td class="has-text-centered"><a href="/fluxos/{{fluxo.id}}">Editar</a></td>
+                    </tr>
+                </tbody>
+                @else
+                <td>Sem fluxos criados!</td>
+                @endeach
+            </table>
+    </div>
 
 
-        <div class="is-half">
-            @if(old('notification'))
-            <div class="notification is-success">
-                {{ old('notification') }}
-                @endif
-            </div>
+    <div class="is-half">
+        @if(old('notification'))
+        <div class="notification is-success">
+            {{ old('notification') }}
+            @endif
         </div>
+    </div>
     </section>
-</div>
+    </div>
 
 </body>
 
