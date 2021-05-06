@@ -5,20 +5,19 @@ const User = use('App/Models/User')
 const FonteDadosFluxo = use('App/Models/FonteDadosFluxo.js')
 
 class FluxoController {
-    async index({ request, view }) {
+    async index({ request, view }) {        
         const requestParams = request.params;
-        if (requestParams == null) {
-            console.log('todos fluxos');
+        //se nao existe parametro, enviar todos os fluxos
+        if (requestParams == null) {            
             const fluxos = await Fluxo.query().with('user').fetch();
             return view.render('meusfluxos', { fluxos: fluxos.toJSON() })
-
+        //se existir, renderizar a view de edicao de fluxo
         } else if (requestParams.fluxo != null) {
             const fluxoAEditar = request.params.fluxo;
             const fluxoAtual = await Fluxo.find(fluxoAEditar);
             return view.render('editarfluxo', { fluxoaeditar: fluxoAtual.toJSON() })
-
-        } else {
-            console.log('all fontes dados 2');
+        //caso undefined, envia tudo
+        } else {            
             const fluxos = await Fluxo.query().with('user').fetch();
             return view.render('meusfluxos', { fluxos: fluxos.toJSON() })
         }

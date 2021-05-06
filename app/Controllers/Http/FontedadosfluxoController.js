@@ -5,14 +5,12 @@ const Database = use('Database')
 class FontedadosfluxoController {
     async index(request) {
         const requestParams = request.params;
-        if (requestParams == null) {
-            console.log('all fontes dados 1');
+        if (requestParams == null) {            
             return await FonteDadosFluxo.all();
         } else if (requestParams.nome != null) {
             const nomeaProcurar = request.params.nome;
             return await FonteDadosFluxo.query().where('nome', 'rlike', nomeaProcurar).fetch();
-        } else {
-            console.log('all fontes dados 2');
+        } else {            
             return await FonteDadosFluxo.all();
         }
     }
