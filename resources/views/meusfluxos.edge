@@ -13,57 +13,102 @@
     <div class="container is-fluid">
         <section class="section">
             <div> <a class="button is-primary" href="/novoFluxo">Novo fluxo</a></div>
-            <table class="table is-fullwidth">
-                <thead>
-                    <tr>
-                        <th scope="col">ID #</th>
-                        <th scope="col">Nome do processo</th>
-                        <th scope="col">Origem</th>
-                        <th scope="col">Razão</th>
-                        <th class="has-text-centered" scope="col">Status</th>
-                        <th class="has-text-centered" scope="col">Autor</th>
-                        <th class="has-text-centered" scope="col">Data de inclusão</th>
-                        <th class="has-text-centered" scope="col">Ações</th>
-                    </tr>
-                </thead>
-                @each(fluxo in fluxos)
-                <tbody>
-                    <tr>
-                        <td>{{fluxo.id}}</td>
-                        <td>
-                            <a href="/fluxos/{{fluxo.id}}">
-                                <div class="media">
-                                    <div class="media-content">{{fluxo.nomedoprocesso}}</div>
-                                </div>
-                            </a>
-                        </td>
-                        <td>{{fluxo.fontedodado}}</td>
-                        <td>
-                            @if(fluxo.razao == null)
-                            Não preenchido
+            <div class="box">
+                <table class="table is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID #</th>
+                            <th scope="col">Nome do processo</th>
+                            <th scope="col">Origem</th>
+                            <th scope="col">Razão</th>
+                            <th class="has-text-centered" scope="col">Status</th>
+                            <th class="has-text-centered" scope="col">Autor</th>
+                            <th class="has-text-centered" scope="col">Data de inclusão</th>
+                            <th class="has-text-centered" scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    @each(fluxo in fluxos.data)
+                    <tbody>
+                        <tr>
+                            <td>{{fluxo.id}}</td>
+                            <td>
+                                <a href="/fluxos/{{fluxo.id}}">
+                                    <div class="media">
+                                        <div class="media-content">{{fluxo.nomedoprocesso}}</div>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>{{fluxo.fontedodado}}</td>
+                            <td>
+                                @yield($fluxo.razao)
+                                Não preenchido
+                                @endyield
+                            </td>
+
+                            @if(fluxo.razao == null || fluxo.justificativa == null || fluxo.comoearmazenado == null ||
+                            prazodeeliminacao == null || protecao == null)
+                            <td class="has-text-centered"><span class="tag is-warning">Incompleto</span></td>
                             @else
-                            {{fluxo.razao}}
+                            <td class="has-text-centered"><span class="tag is-sucess">Concluído</span></td>
                             @endif
-                        </td>
+                            <td class="has-text-centered">{{fluxo.user.username}}</td>
+                            <td class="has-text-centered">{{fluxo.created_at}}</td>
+                            <td class="has-text-centered"><a href="/fluxos/{{fluxo.id}}">Editar</a></td>
+                        </tr>
+                    </tbody>
+                    @else
+                    <td>Sem fluxos criados!</td>
+                    @endeach
+                </table>
+                @if(fluxos.lastPage > 1)
+                <nav>
+                    <div class="container">
+                        <div class="pagination is-centered" role="navigation" aria-label="pagination">
 
-                        @if(fluxo.razao == null || fluxo.justificativa == null || fluxo.comoearmazenado == null ||
-                        prazodeeliminacao == null || protecao == null)
-                        <td class="has-text-centered"><span class="tag is-warning">Incompleto</span></td>
-                        @else
-                        <td class="has-text-centered"><span class="tag is-sucess">Concluído</span></td>
-                        @endif
-                        <td class="has-text-centered">{{fluxo.user.username}}</td>
-                        <td class="has-text-centered">{{fluxo.created_at}}</td>
-                        <td class="has-text-centered"><a href="/fluxos/{{fluxo.id}}">Editar</a></td>
-                    </tr>
-                </tbody>
-                @else
-                <td>Sem fluxos criados!</td>
-                @endeach
-            </table>
+                            @if(fluxos.page != 1)
+                            <a class="pagination-previous button" href="/meusFluxos/{{fluxos.page - 1}}">Anterior</a>
+                            @else
+                            <a class="pagination-previous button disabled">Anterior</a>
+                            @endif
+
+                            @if(fluxos.page < fluxos.lastPage && fluxos.page !=fluxos.lastPage)                            
+                                <a class="pagination-next button" href="/meusFluxos/{{fluxos.page + 1}}">Proxima </a>
+                                @else
+                                <a class="pagination-next button disabled">Proxima</a>
+                                @endif
+
+                                <ul class="pagination-list">
+                                    {{--  na primeira pagina deixamos marcado como current, ou tiramos caso ela nao seja  --}}
+                                    @if(fluxos.page == 1)
+                                    <li><a class="pagination-link is-current" aria-label="Pagina 1" href="1">1</a></li>
+                                    @else
+                                    <li><a class="pagination-link" aria-label="Pagina 1" href="1">1</a></li>   
+                                    @endif
+                                    
+                                    {{--  logica esta redundante, revisar  --}}
+                                    @if(fluxos.page == fluxos.lastPage || fluxos.page != fluxos.lastPage  && fluxos.page != 1 && (fluxos.lastPage - 1) == 1)
+
+                                    <li><a class="pagination-link" aria-label="Pagina {{fluxos.page - 1}}" href="{{fluxos.page - 1}}">{{fluxos.page - 1}}</a></li>
+
+                                    @endif
+                                    @if(fluxos.page != 1)
+                                        <li><a class="pagination-link is-current" aria-label="Pagina {{fluxos.page}}" aria-current="page" href="">{{fluxos.page}}</a></li>  
+                                    @endif
+                                    
+
+                                    @if(fluxos.page < fluxos.lastPage && fluxos.page !=fluxos.lastPage)
+
+                                        <li><a class="pagination-link" aria-label="Pagina {{fluxos.page}}" aria-current="page" href="{{fluxos.page + 1}}">{{fluxos.page + 1}}</a></li>
+
+                                    @endif
+                                </ul>
+                        </div>
+                    </div>
+                </nav>
+                @endif
+
+            </div>
     </div>
-
-
     <div class="is-half">
         @if(old('notification'))
         <div class="notification is-success">
@@ -73,7 +118,6 @@
     </div>
     </section>
     </div>
-
 </body>
 
 </html>

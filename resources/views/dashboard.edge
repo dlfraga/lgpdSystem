@@ -11,105 +11,109 @@
 <body>
     @include('menu')
 
-<div class="container is-fluid">
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column">
-                    <div class="columns is-multiline is-mobile">
-                        <div class="column is-12-mobile is-6-tablet">
-                            <div class="box">
-                                <h3 class="title is-4">Total de Fluxos</h3>
-                                <div class="media">
-                                    <div class="media-left">
-                                        <figure class="image is-48x48"><img src="/images/flow.svg" alt="">
-                                        </figure>
+    <div class="container is-fluid">
+        <section class="section">
+            <div class="container">
+                <div class="box">
+                    <div class="columns">
+                        <div class="column">
+                            <div class="columns is-multiline is-mobile">
+                                <div class="column is-12-mobile is-6-tablet">
+                                    <div class="box">
+                                        <h3 class="title is-4">Total de Fluxos</h3>
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <figure class="image is-48x48"><img src="/images/flow.svg" alt="">
+                                                </figure>
+                                            </div>
+                                            <div class="media-content">
+                                                <h4 class="title is-2 has-text-right">
+                                                    @if(fluxosCount == 0)
+                                                    0
+                                                    @else
+                                                    {{fluxosCount}}
+                                                    @endif
+                                                </h4>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="media-content">
-                                        <h4 class="title is-2 has-text-right">
-                                            @if(fluxosCount == 0)
-                                            0
-                                            @else 
-                                            {{fluxosCount}}
-                                            @endif
-                                        </h4>
+                                </div>
+                                <div class="column is-12-mobile is-6-tablet">
+                                    <div class="box">
+                                        <h3 class="title is-4">Fluxos completos</h3>
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <figure class="image is-48x48"><img src="/images/pause.svg" alt="">
+                                                </figure>
+                                            </div>
+                                            <div class="media-content">
+                                                <h4 class="title is-2 has-text-right">
+                                                    @if(fluxosConcluidos == 0)
+                                                    0
+                                                    @else
+                                                    {{fluxosConcluidos}}
+                                                    @endif
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-12-mobile is-6-tablet">
+                                    <div class="box">
+                                        <h3 class="title is-4">Total de solicitações de informação</h3>
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <figure class="image is-48x48"><img src="/images/complete.svg" alt="">
+                                                </figure>
+                                            </div>
+                                            <div class="media-content">
+                                                <h4 class="title is-2 has-text-right">?</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-12-mobile is-6-tablet">
+                                    <div class="box">
+                                        <h3 class="title is-4">Solicitações de informação em aberto</h3>
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <figure class="image is-48x48"><img src="/images/request.svg" alt="">
+                                                </figure>
+                                            </div>
+                                            <div class="media-content">
+                                                <h4 class="title is-2 has-text-right">?</h4>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="column is-12-mobile is-6-tablet">
-                            <div class="box">
-                                <h3 class="title is-4">Fluxos completos</h3>
-                                <div class="media">
-                                    <div class="media-left">
-                                        <figure class="image is-48x48"><img src="/images/pause.svg" alt="">
-                                        </figure>
-                                    </div>
-                                    <div class="media-content">
-                                        <h4 class="title is-2 has-text-right">
-                                            @if(fluxosConcluidos == 0)
-                                            0
-                                            @else
-                                            {{fluxosConcluidos}}
-                                            @endif
-                                        </h4>
-                                    </div>
+                        <div class="column">
+                            <div class="card">
+                                <div class="card-header">
+                                    <p class="card-header-title">Fluxos</p>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="column is-12-mobile is-6-tablet">
-                            <div class="box">
-                                <h3 class="title is-4">Total de solicitações de informação</h3>
-                                <div class="media">
-                                    <div class="media-left">
-                                        <figure class="image is-48x48"><img src="/images/complete.svg"
-                                                alt=""></figure>
-                                    </div>
-                                    <div class="media-content">
-                                        <h4 class="title is-2 has-text-right">?</h4>
-                                    </div>
+                                <div class="card-content">
+                                    <p class="subtitle">Para adicionar um novo fluxo de dados pessoais clique no botão
+                                        abaixo</p>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="column is-12-mobile is-6-tablet">
-                            <div class="box">
-                                <h3 class="title is-4">Solicitações de informação em aberto</h3>
-                                <div class="media">
-                                    <div class="media-left">
-                                        <figure class="image is-48x48"><img src="/images/request.svg"                                            
-                                                alt=""></figure>
-                                    </div>
-                                    <div class="media-content">
-                                        <h4 class="title is-2 has-text-right">?</h4>
-                                    </div>
+                                <div class="card-footer"><a class="card-footer-item" href="/novoFluxo">Novo fluxo</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <div class="card-header">
-                            <p class="card-header-title">Fluxos</p>
+                    <div class="is-half is-one-quarter">
+                        @if(old('notification'))
+                        <div class="notification is-success">
+                            {{ old('notification') }}
+                            @endif
                         </div>
-                        <div class="card-content">
-                            <p class="subtitle">Para adicionar um novo fluxo de dados pessoais clique no botão abaixo</p>
-                        </div>
-                        <div class="card-footer"><a class="card-footer-item" href="/novoFluxo">Novo fluxo</a></div>
                     </div>
                 </div>
             </div>
-            <div class="is-half is-one-quarter">
-                @if(old('notification'))
-                <div class="notification is-success">
-                    {{ old('notification') }}
-                    @endif
-                </div>
-            </div>
-        </div>
-        
-    </section>
-</div>
+
+        </section>
+    </div>
 </body>
 
 </html>

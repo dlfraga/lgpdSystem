@@ -7,11 +7,18 @@ class DashboardController {
         //conta quantos fluxos existem
         const fluxosCount = await Database.from('fluxos').count();
         const fluxosTotal = fluxosCount[0]['count(*)'];
-                
+
         //verifica se os campos principais estão como null
-        const fluxosComJustificativaCount = await Database.from('fluxos').whereNotNull('justificativa').count();                
-        const fluxosConcluidos = fluxosComJustificativaCount[0]['count(*)']        
-                
+        //@if(fluxo.razao == null || fluxo.justificativa == null || fluxo.comoearmazenado == null ||        prazodeeliminacao == null || protecao == null)
+        const fluxosComJustificativaCount = await Database.from('fluxos')
+            .whereNotNull('justificativa')
+            .orWhereNotNull('razao')
+            .orWhereNotNull('comoearmazenado')
+            .orWhereNotNull('prazodeeliminacao')
+            .orWhereNotNull('protecao')
+            .count();
+        const fluxosConcluidos = fluxosComJustificativaCount[0]['count(*)']
+
         return view.render('dashboard', { fluxosCount: fluxosTotal, fluxosConcluidos: fluxosConcluidos })
     }
 }

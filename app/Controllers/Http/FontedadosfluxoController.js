@@ -1,6 +1,5 @@
 'use strict'
 const FonteDadosFluxo = use('App/Models/FonteDadosFluxo.js')
-const Database = use('Database')
 
 class FontedadosfluxoController {
     async index(request) {

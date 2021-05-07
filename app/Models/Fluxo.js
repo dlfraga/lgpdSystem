@@ -11,6 +11,14 @@ class Fluxo extends Model {
     fonteDadosFluxo() {
         return this.hasOne('App/Models/FonteDadosFluxo')
     }
+
+    static castDates(field, value) {
+        if (field == 'created_at') {
+            value.locale('br');
+            return `${value.format('l')}`
+        }
+        return super.formatDates(field, value)
+    }
 }
 
 module.exports = Fluxo

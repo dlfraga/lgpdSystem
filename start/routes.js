@@ -31,9 +31,12 @@ Route.get('/logout', 'UserController.logout').middleware('auth');
 Route.post('/login', 'UserController.login').middleware('guest');
 Route.post('/store', 'UserController.store').middleware('auth');
 
-Route.get('/meusFluxos', 'FluxoController.index').middleware('auth');
+Route.get('/meusFluxos/:pag?', 'FluxoController.index').middleware('auth');
 /**Resources completos=>  */
 Route.resource('fluxos/:fluxo?', 'FluxoController').middleware('auth');
+
+
+
 Route.resource('solicitacoes', 'SolicitacoesController');
 Route.resource('fonteDadosFluxo/:nome?', 'FontedadosfluxoController').middleware('auth');
 Route.resource('meuPerfil', 'PerfilController');
