@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    @include('menu')
     @loggedIn
     <section class="section">
         <div class="container">
@@ -19,7 +20,7 @@
             <div class="subtitle">
                 <p>Nesta tela você pode alterar as suas informações pessoais</p>                
                 <div class="loginBox">
-                    <form action="/meuPerfil" method="POST">
+                    <form action="/usuarios/{{perfil.id}}" method="POST">
                         {{ csrfField() }}
                         <section class="section">
                             <div class="container">
