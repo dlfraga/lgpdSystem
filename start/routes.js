@@ -42,7 +42,8 @@ Route.resource('fluxos/:fluxo?', 'FluxoController').middleware('auth');
 /**gerencia usuarios */
 Route.resource('usuarios/:id?/:delete?', 'UserController').middleware('auth');
 /**Pagina de administracao */
-Route.resource('/administracao', 'UserController').middleware('auth');
+
+Route.resource('/Administracao', 'UserController').middleware('auth');
 
 /** Solicitacoes */
 Route.resource('/solicitacoes', 'SolicitacoesController');
@@ -50,9 +51,3 @@ Route.resource('/solicitacoes', 'SolicitacoesController');
 Route.resource('/fonteDadosFluxo/:nome?', 'FontedadosfluxoController').middleware('auth');
 /**Pagina / controller para permitir a alteração de dados pessoais */
 Route.get('/meuPerfil', 'UserController.meuPerfil').middleware('auth');
-
-
-
-
-
-

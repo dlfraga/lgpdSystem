@@ -44,7 +44,6 @@
                                 Não preenchido
                                 @endyield
                             </td>
-
                             @if(fluxo.razao == null || fluxo.justificativa == null || fluxo.comoearmazenado == null ||
                             prazodeeliminacao == null || protecao == null)
                             <td class="has-text-centered"><span class="tag is-warning">Incompleto</span></td>
@@ -53,7 +52,18 @@
                             @endif
                             <td class="has-text-centered">{{fluxo.user.username}}</td>
                             <td class="has-text-centered">{{fluxo.created_at}}</td>
-                            <td class="has-text-centered"><a href="/fluxos/{{fluxo.id}}">Editar</a></td>
+                            <td class="has-text-centered">
+                                <a class="button" href="/fluxos/{{fluxo.id}}">
+                                    <span class="icon">
+                                        <i class="icofont-edit"></i>
+                                    </span>
+                                </a>
+                                <a class="button" href="/fluxos/{{fluxo.id}}">
+                                    <span class="icon">
+                                        <i class="icofont-trash"></i>
+                                    </span>
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                     @else
@@ -64,49 +74,53 @@
                 <nav>
                     <div class="container">
                         <div class="pagination is-centered" role="navigation" aria-label="pagination">
-
+                            {{--  botao anterior  --}}
                             @if(fluxos.page != 1)
                             <a class="pagination-previous button" href="/meusFluxos/{{fluxos.page - 1}}">Anterior</a>
                             @else
                             <a class="pagination-previous button disabled">Anterior</a>
                             @endif
-
-                            @if(fluxos.page < fluxos.lastPage && fluxos.page !=fluxos.lastPage)                            
-                                <a class="pagination-next button" href="/meusFluxos/{{fluxos.page + 1}}">Proxima </a>
+                            {{--  botao proximo  --}}
+                            @if(fluxos.page < fluxos.lastPage && fluxos.page !=fluxos.lastPage) 
+                            <a class="pagination-next button" href="/meusFluxos/{{fluxos.page + 1}}">Proxima</a>
                                 @else
                                 <a class="pagination-next button disabled">Proxima</a>
                                 @endif
-
                                 <ul class="pagination-list">
-                                    {{--  na primeira pagina deixamos marcado como current, ou tiramos caso ela nao seja  --}}
+                                    {{--  na primeira pagina deixamos marcado como current, ou tiramos o current caso ela nao seja. ela sempre fica visivel--}}
                                     @if(fluxos.page == 1)
-                                    <li><a class="pagination-link is-current" aria-label="Pagina 1" href="/meusFluxos">1</a></li>
+                                    <li><a class="pagination-link is-current" aria-label="Pagina 1"
+                                            href="/meusFluxos">1</a></li>
                                     @else
-                                    <li><a class="pagination-link" aria-label="Pagina 1" href="1">1</a></li>   
+                                    <li><a class="pagination-link" aria-label="Pagina 1" href="1">1</a></li>
                                     @endif
-                                    
-                                    {{--  logica esta redundante, revisar  --}}
-                                    @if(fluxos.page == fluxos.lastPage || fluxos.page != fluxos.lastPage  && fluxos.page != 1 && (fluxos.lastPage - 1) == 1)
-
-                                    <li><a class="pagination-link" aria-label="Pagina {{fluxos.page - 1}}" href="/meusFluxos/{{fluxos.page - 1}}">{{fluxos.page - 1}}</a></li>
-
+                                    {{--  pagina anterior  --}}
+                                    @if(fluxos.page != 1 && (fluxos.lastPage - 1) == 1)
+                                    <li>
+                                        <a class="pagination-link" aria-label="Pagina {{fluxos.page - 1}}"
+                                            href="/meusFluxos/{{fluxos.page - 1}}">{{fluxos.page - 1}}
+                                        </a>
+                                    </li>
                                     @endif
+                                    {{--  marcar pagina atual  --}}
                                     @if(fluxos.page != 1)
-                                        <li><a class="pagination-link is-current" aria-label="Pagina {{fluxos.page}}" aria-current="page" href="">{{fluxos.page}}</a></li>  
+                                    <li><a class="pagination-link is-current" aria-label="Pagina {{fluxos.page}}"
+                                            aria-current="page" href="">{{fluxos.page}}</a></li>
                                     @endif
-                                    
-
-                                    @if(fluxos.page < fluxos.lastPage && fluxos.page !=fluxos.lastPage)
-
-                                        <li><a class="pagination-link" aria-label="Pagina {{fluxos.page}}" aria-current="page" href="/meusFluxos/{{fluxos.page + 1}}">{{fluxos.page + 1}}</a></li>
-
-                                    @endif
+                                    {{--  proxima pagina -> atual + 1  --}}
+                                    @if( fluxos.page < fluxos.lastPage && fluxos.page !=fluxos.lastPage ) 
+                                    <li>
+                                        <a class="pagination-link" aria-label="Pagina {{fluxos.page}}"
+                                            aria-current="page"
+                                            href="/meusFluxos/{{fluxos.page + 1}}">{{fluxos.page + 1}}
+                                        </a>
+                                        </li>
+                                        @endif
                                 </ul>
                         </div>
                     </div>
                 </nav>
                 @endif
-
             </div>
     </div>
     <div class="is-half">

@@ -16,7 +16,7 @@
                 <div class="tile is-parent is-6 is-vertical">
                     <div class="columns is-centered">
                         <div class="box is-child">
-                            <p class="title">Gerenciamento de usuários</p>
+                            <p class="title has-text-centered">Gerenciamento de usuários</p>
                             <section>
                                 <div class="table-container">
                                     <table class="table is-striped">
@@ -32,6 +32,9 @@
                                                     Criado em
                                                 </th>
                                                 <th style="text-align:center">
+                                                    Admin?
+                                                </th>
+                                                <th style="text-align:center">
                                                     Ações
                                                 </th>
                                             </tr>
@@ -42,6 +45,11 @@
                                                 <td>{{user.username}} </td>
                                                 <td>{{user.email}} </td>
                                                 <td>{{user.created_at}} </td>
+                                                @if(user.is_admin == 1)
+                                                <td class="has-text-centered">Sim</td>
+                                                @else
+                                                <td class="has-text-centered">Não</td>
+                                                @endif
                                                 <td>
                                                     <a class="button is-small" href="/usuarios/{{user.id}}">
                                                         <span class="icon">
@@ -64,12 +72,74 @@
                         </div>
                     </div>
                 </div>
-                <div class="tile is-parent is-vertical">
+                <div class="tile is-6 is-vertical">
                     <div class="box is-child">
                         <section>
-
-
-
+                            <div class="title has-text-centered"> Criar novo usuário
+                            </div>
+                            <div class="loginBox">
+                                <form action="/usuarios" method="POST">
+                                    {{ csrfField() }}
+                                    <div class="container">
+                                        <div class="columns is-centered">
+                                            <div class="column is-6 is-6-desktop">
+                                                <form>
+                                                    <div class="field">
+                                                        <div class="control">
+                                                            <input class="input" type="text" placeholder="Nome"
+                                                                name="username">
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <div class="control">
+                                                            <input class="input" type="email" placeholder="Email"
+                                                                name="email">
+                                                        </div>
+                                                    </div>
+                                                    @if(hasErrorFor('email'))
+                                                    <div class="notification is-danger">
+                                                        {{ getErrorFor('email') }}
+                                                    </div>
+                                                    @endif
+                                                    <div class="field">
+                                                        <div class="control">
+                                                            <input class="input" id="password" type="password"
+                                                                placeholder="Digite a senha" name="password" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <div class="control">
+                                                            <input class="input" id="confirm_password" type="password"
+                                                                placeholder="Digite a senha novamente" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <div class="control">
+                                                            <label class="checkbox form-check-label" for="is_admin">
+                                                                <input type="checkbox" id="is_admin" name="is_admin"
+                                                                    value="true">
+                                                                <span class="ml-1">Este login deve ser
+                                                                    administrador?</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <div class="control">
+                                                            <button
+                                                                class="button is-primary is-fullwidth">Salvar</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <div class="field">
+                                                    <div class="control">
+                                                        <a class="button is-danger is-fullwidth"
+                                                            href="/administracao">Cancelar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
                         </section>
                     </div>
                 </div>
@@ -83,7 +153,7 @@
             </div>
 
         </div>
-    </section>    
+    </section>
 </body>
 
 </html>

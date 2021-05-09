@@ -7,20 +7,20 @@ const FonteDadosFluxo = use('App/Models/FonteDadosFluxo.js')
 class FluxoController {
     async index({ request, view }) {
         const requestParams = request.params;
+        //retorna os fluxos na pagina 1 caso o parametro pagina esteja null. 
+        //sao duas rotas diferentes, uma vem por meusFluxos e outra por fluxos
+        //a que pode vir com o parametro pag é meus fluxos
         if (requestParams.pag != null) {
-            console.log(request.params);
             const fluxos = await Fluxo.query().with('user').paginate(requestParams.pag, 15);
             console.log(fluxos.toJSON())
             return view.render('meusfluxos', { fluxos: fluxos.toJSON() })
-
+            //a rota /fluxos pode enviar o parametro fluxo, considerado aqui. retorna um unico fluxo            
         } else if (requestParams.fluxo != null) {
-            console.log(request.params);
             const fluxoAEditar = request.params.fluxo;
             const fluxoAtual = await Fluxo.find(fluxoAEditar);
             return view.render('editarfluxo', { fluxoaeditar: fluxoAtual.toJSON() })
-            //caso vazio envia tudo
+            //caso padrao, envia pag 1 com 15 valores
         } else {
-            console.log(request.params);
             const fluxos = await Fluxo.query().with('user').paginate(1, 15);
             return view.render('meusfluxos', { fluxos: fluxos.toJSON() })
         }
@@ -29,7 +29,6 @@ class FluxoController {
     async store({ request, response, session, auth }) {
         const requestParams = request.params;
         if (requestParams.fluxo != null) {
-            console.log('fluxoatual')
             const fluxo = await await Fluxo.find(request.params.fluxo);
             fluxo.nomedoprocesso = request.input('nomedoprocesso');
             fluxo.fontedodado = request.input('fontedodado');

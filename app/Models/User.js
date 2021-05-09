@@ -10,7 +10,9 @@ class User extends Model {
   static get hidden() {
     return ['password']
   }
-
+  get validateAll() {
+    return true
+  }
   static castDates(field, value) {
     if (field == 'created_at') {
       value.locale('br');
