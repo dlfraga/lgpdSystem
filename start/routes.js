@@ -28,7 +28,7 @@ Route.get('/logout', 'UserController.logout').middleware('auth');
 
 /**Envios manuais */
 Route.post('/login', 'UserController.login').middleware('guest');
-Route.post('/store', 'UserController.store').middleware('auth');
+//Route.post('/store', 'UserController.store').middleware('auth');
 
 /**Paginas de edicao de fluxo - recebem parametro de paginação para o caso 
  * de haverem mais fluxos do que uma pagina pode mostrar */
@@ -40,7 +40,7 @@ Route.on('/novoFluxo').render('novofluxo').middleware('auth');
 Route.on('/editarFluxo').render('editarFluxo').middleware('auth');
 Route.resource('fluxos/:fluxo?', 'FluxoController').middleware('auth');
 /**gerencia usuarios */
-Route.resource('usuarios/:id?', 'UserController').middleware('auth');
+Route.resource('usuarios/:id?/:delete?', 'UserController').middleware('auth');
 /**Pagina de administracao */
 Route.resource('/administracao', 'UserController').middleware('auth');
 

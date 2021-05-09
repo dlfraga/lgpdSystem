@@ -24,23 +24,40 @@ class UserController {
     /**
      * Lista os usuarios ou os perfis
      */
-    async index({ view, auth, response }) {
+    async index({ view, auth, response, params, session }) {
         /**checa se o login é administrador */
         const currentUser = await User.find(auth.user.id);
         if (currentUser.is_admin == 1) {
-            const users = User.all();
-            return view.render('administracao', { users: users })
+            if (params.delete == 'true') {
+                //o proprio admin não pode deletar o seu login
+                if (params.id != auth.user.id) {
+                    const userToBeDeleted = await User.find(params.id);
+                    userToBeDeleted.delete();
+                    session.flash({ notification: 'Usuário eliminado!' })
+                    response.redirect('/administracao')
+                } else {
+                    session.flash({ notification: 'Você não pode deletar o seu login!' })
+                    response.redirect('/administracao')
+                }
+            } else if (params.id != null) {
+                try {
+                    const userToBeEdited = await User.find(params.id)
+                    console.log(userToBeEdited);
+                    return view.render('perfil', { perfil: userToBeEdited.toJSON() });
+                } catch (error) {
+                    return 'Usuario nao encontrado!'
+                }
+
+            } else {
+                const users = await User.all();
+                return view.render('administracao', { users: users.toJSON() })
+            }
+
         } else {
-            return view.render('perfil', { perfil: currentUser.toJSON() })
+            response.redirect('/meuPerfil');
         }
     }
 
-    async show({ auth, params }) {
-        if (auth.user.id !== Number(params.id)) {
-            return "Você não pode ver o perfil de outros usuários"
-        }
-        return auth.user;
-    }
 
     async store({ auth, session, request, response, params }) {
         //alterar o proprio perfil
@@ -54,34 +71,50 @@ class UserController {
                 user.password = request.input('password')
                 await user.save()
                 session.flash({ notification: 'Usuário adicionado!' })
-                return response.redirect('back')
+                return response.redirect('/administracao')
             } else {
                 session.flash({ error: 'Você não tem permissão para criar novos usuários!' })
-                return response.redirect('back')
+                return response.redirect('/dashboard')
             }
 
         } else if (params.id == auth.user.id) {
             //altera o proprio perfil
-            return await this.changeExistingUser(auth.user.id, request, session, response);
+            if(await this.changeExistingUser(auth.user.id, request, session, response)){
+                session.flash({ notification: 'Perfil atualizado!' })
+                response.redirect('/dashboard')
+            }
 
         } else if (params !== auth.user.id) {
             //alterar o perfil de outra pessoa
             const currentUser = await User.find(auth.user.id);
             if (currentUser.is_admin == 1) {
-                return await this.changeExistingUser(params.id, request, session, response);
+                if(await this.changeExistingUser(params.id, request, session, response)){
+                    session.flash({ notification: 'Perfil alterado!' })
+                    response.redirect('/administracao')
+                } else {
+                    return 'falha ao alterar o usuario'
+                }
             } else {
                 session.flash({ error: 'Você não pode alterar o perfil de outros usuários!' })
+                response.redirect('/dashboard')
             }
         } else {
             console.log('na duvida salva somente o perfil da pessoa')
-            return await this.changeExistingUser(auth.user.id, request, session, response);
+            if(await this.changeExistingUser(auth.user.id, request, session, response)){
+                response.redirect('/dashboard')
+            }
         }
         return 'Erro na ateração de usuarios'
     }
 
-    async meuPerfil({ view, auth }) {
-        const currentUser = await User.find(auth.user.id);            
-        return view.render('perfil', {perfil: currentUser.toJSON()})        
+    async delete(auth, session, request, response, params) {
+        //checa se está logado
+        const currentUser = await User.find(auth.user.id);
+        if (currentUser != null) {
+            console.log('ok deletando')
+        } else {
+            console.log('voce nao esta logado')
+        }
     }
 
     async changeExistingUser(id, request, session, response) {
@@ -89,10 +122,11 @@ class UserController {
         user.username = request.input('username')
         user.email = request.input('email')
         user.password = request.input('password')
-        if (user.save()) {
-            session.flash({ notification: 'Detalhes atualizados!' })
-            return response.redirect('/dashboard')
-        }
+        return user.save()                    
+    }
+    async meuPerfil({ view, auth }) {
+        const currentUser = await User.find(auth.user.id);
+        return view.render('perfil', { perfil: currentUser.toJSON() })
     }
 
     async logout({ auth, response, session }) {

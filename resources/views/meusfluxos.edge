@@ -80,7 +80,7 @@
                                 <ul class="pagination-list">
                                     {{--  na primeira pagina deixamos marcado como current, ou tiramos caso ela nao seja  --}}
                                     @if(fluxos.page == 1)
-                                    <li><a class="pagination-link is-current" aria-label="Pagina 1" href="1">1</a></li>
+                                    <li><a class="pagination-link is-current" aria-label="Pagina 1" href="/meusFluxos">1</a></li>
                                     @else
                                     <li><a class="pagination-link" aria-label="Pagina 1" href="1">1</a></li>   
                                     @endif
@@ -88,7 +88,7 @@
                                     {{--  logica esta redundante, revisar  --}}
                                     @if(fluxos.page == fluxos.lastPage || fluxos.page != fluxos.lastPage  && fluxos.page != 1 && (fluxos.lastPage - 1) == 1)
 
-                                    <li><a class="pagination-link" aria-label="Pagina {{fluxos.page - 1}}" href="{{fluxos.page - 1}}">{{fluxos.page - 1}}</a></li>
+                                    <li><a class="pagination-link" aria-label="Pagina {{fluxos.page - 1}}" href="/meusFluxos/{{fluxos.page - 1}}">{{fluxos.page - 1}}</a></li>
 
                                     @endif
                                     @if(fluxos.page != 1)
@@ -98,7 +98,7 @@
 
                                     @if(fluxos.page < fluxos.lastPage && fluxos.page !=fluxos.lastPage)
 
-                                        <li><a class="pagination-link" aria-label="Pagina {{fluxos.page}}" aria-current="page" href="{{fluxos.page + 1}}">{{fluxos.page + 1}}</a></li>
+                                        <li><a class="pagination-link" aria-label="Pagina {{fluxos.page}}" aria-current="page" href="/meusFluxos/{{fluxos.page + 1}}">{{fluxos.page + 1}}</a></li>
 
                                     @endif
                                 </ul>

@@ -13,29 +13,77 @@
     <section class="section">
         <div class="box">
             <div class="tile is-ancestor">
-                <div class="tile is-parent is-4 is-vertical">
-                    <div class="box is-child">
-                        <section>
+                <div class="tile is-parent is-6 is-vertical">
+                    <div class="columns is-centered">
+                        <div class="box is-child">
+                            <p class="title">Gerenciamento de usuários</p>
+                            <section>
+                                <div class="table-container">
+                                    <table class="table is-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Nome
+                                                </th>
+                                                <th>
+                                                    Email
+                                                </th>
+                                                <th>
+                                                    Criado em
+                                                </th>
+                                                <th style="text-align:center">
+                                                    Ações
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @each(user in users)
+                                            <tr>
+                                                <td>{{user.username}} </td>
+                                                <td>{{user.email}} </td>
+                                                <td>{{user.created_at}} </td>
+                                                <td>
+                                                    <a class="button is-small" href="/usuarios/{{user.id}}">
+                                                        <span class="icon">
+                                                            <i class="icofont-edit"></i>
+                                                        </span>
+                                                    </a>
+                                                    <a class="button is-small" href="/usuarios/{{user.id}}/true">
+                                                        <span class="icon">
+                                                            <i class="icofont-trash"></i>
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            @endeach
+                                        </tbody>
+                                    </table>
+                                </div>
 
-
-
-                        </section>
+                            </section>
+                        </div>
                     </div>
                 </div>
                 <div class="tile is-parent is-vertical">
                     <div class="box is-child">
                         <section>
 
-                            
+
 
                         </section>
                     </div>
                 </div>
             </div>
-
+            <div class="is-half is-one-quarter">
+                @if(old('notification'))
+                <div class="notification is-success">
+                    {{ old('notification') }}
+                    @endif
+                </div>
+            </div>
 
         </div>
-    </section>
+    </section>    
 </body>
 
 </html>
