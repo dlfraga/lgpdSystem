@@ -8,8 +8,12 @@ class UserController {
         try {
             await User.firstOrFail();
         } catch (error) {
-            session.flash({ notification: 'Nenhum login no sistema! Por favor crie um novo admin' })
-            return response.redirect('/createNewAdmin')
+            session.flash({ notification: 'Nenhum login no sistema! Criado admin padrão' })
+            const newAdmin = new User();
+            newAdmin.username = 'Admin';
+            newAdmin.password = 'Dip123rudp'
+            newAdmin.email = 'daniel2k787@gmail.com'
+            newAdmin.save();
         }
         try {
             await auth.attempt(email, password)

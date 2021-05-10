@@ -38,7 +38,8 @@ Route.get('/meusFluxos/:pag?', 'FluxoController.index').middleware('auth');
 /** Paginas de edição de fluxo */
 Route.on('/novoFluxo').render('novofluxo').middleware('auth');
 Route.on('/editarFluxo').render('editarFluxo').middleware('auth');
-Route.resource('fluxos/:fluxo?', 'FluxoController').middleware('auth');
+Route.resource('/fluxos/:fluxo?', 'FluxoController').middleware('auth');
+Route.get('/eliminarFluxo/:fluxoid', 'FluxoController.remove').middleware('auth');
 /**gerencia usuarios */
 Route.resource('usuarios/:id?/:delete?', 'UserController').middleware('auth');
 /**Pagina de administracao */
@@ -48,6 +49,7 @@ Route.resource('/Administracao', 'UserController').middleware('auth');
 /** Solicitacoes */
 Route.resource('/solicitacoes', 'SolicitacoesController');
 /**Endpoint de API para resolver dinamicamente os nomes de fontes de dados de fluxos */
-Route.resource('/fonteDadosFluxo/:nome?', 'FontedadosfluxoController').middleware('auth');
+Route.resource('/fonteDadosFluxo/:id?', 'FontedadosfluxoController').middleware('auth');
+
 /**Pagina / controller para permitir a alteração de dados pessoais */
 Route.get('/meuPerfil', 'UserController.meuPerfil').middleware('auth');

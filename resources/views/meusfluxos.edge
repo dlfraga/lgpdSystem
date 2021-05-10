@@ -13,7 +13,22 @@
     <div class="container is-fluid">
         <section class="section">
             <div> <a class="button is-primary" href="/novoFluxo">Novo fluxo</a></div>
-            <div class="box">
+            <div class="box">               
+                    @if(old('notification'))
+                    <div class="columns is-centered">
+                     <div class="column is-half notification is-success has-text-centered">
+                        {{ old('notification') }}
+                     </div>
+                    </div>
+                    @endif
+                    @if(old('error'))
+                    <div class="column is-half notification is-success has-text-centered">
+                     <div class="notification is-danger">
+                        {{ flashMessage('error') }}
+                     </div>
+                    </div>
+                    @endif
+                
                 <table class="table is-fullwidth">
                     <thead>
                         <tr>
@@ -58,7 +73,7 @@
                                         <i class="icofont-edit"></i>
                                     </span>
                                 </a>
-                                <a class="button" href="/fluxos/{{fluxo.id}}">
+                                <a class="button" href="/eliminarFluxo/{{fluxo.id}}">
                                     <span class="icon">
                                         <i class="icofont-trash"></i>
                                     </span>
@@ -81,8 +96,9 @@
                             <a class="pagination-previous button disabled">Anterior</a>
                             @endif
                             {{--  botao proximo  --}}
-                            @if(fluxos.page < fluxos.lastPage && fluxos.page !=fluxos.lastPage) 
-                            <a class="pagination-next button" href="/meusFluxos/{{fluxos.page + 1}}">Proxima</a>
+                            @if(fluxos.page < fluxos.lastPage && fluxos.page !=fluxos.lastPage)
+                             <a
+                                class="pagination-next button" href="/meusFluxos/{{fluxos.page + 1}}">Proxima</a>
                                 @else
                                 <a class="pagination-next button disabled">Proxima</a>
                                 @endif
@@ -122,15 +138,7 @@
                 </nav>
                 @endif
             </div>
-    </div>
-    <div class="is-half">
-        @if(old('notification'))
-        <div class="notification is-success">
-            {{ old('notification') }}
-            @endif
-        </div>
-    </div>
-    </section>
+        </section>
     </div>
 </body>
 

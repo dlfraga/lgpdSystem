@@ -11,7 +11,7 @@ class FluxoController {
         //sao duas rotas diferentes, uma vem por meusFluxos e outra por fluxos
         //a que pode vir com o parametro pag é meus fluxos
         if (requestParams.pag != null) {
-            const fluxos = await Fluxo.query().with('user').paginate(requestParams.pag, 15);
+            const fluxos = await Fluxo.query().with('user').paginate(requestParams.pag, 12);
             console.log(fluxos.toJSON())
             return view.render('meusfluxos', { fluxos: fluxos.toJSON() })
             //a rota /fluxos pode enviar o parametro fluxo, considerado aqui. retorna um unico fluxo            
@@ -20,8 +20,9 @@ class FluxoController {
             const fluxoAtual = await Fluxo.find(fluxoAEditar);
             return view.render('editarfluxo', { fluxoaeditar: fluxoAtual.toJSON() })
             //caso padrao, envia pag 1 com 15 valores
+
         } else {
-            const fluxos = await Fluxo.query().with('user').paginate(1, 15);
+            const fluxos = await Fluxo.query().with('user').paginate(1, 12);
             return view.render('meusfluxos', { fluxos: fluxos.toJSON() })
         }
     }
@@ -87,6 +88,23 @@ class FluxoController {
         }
 
     }
+
+    async remove({ params, response, session}) {
+        if (params.fluxoid != null) {
+            const fluxoASerDeletado = await Fluxo.find(params.fluxoid);            
+            if (await fluxoASerDeletado.delete()) {
+                session.flash({ notification: 'Fluxo eliminado com sucesso!' })                
+                return response.redirect('/meusFluxos')
+            } else {
+                session.flash({ error: 'Falha ao eliminar!' })
+                return response.redirect('/meusFluxos')
+            }
+
+        }
+
+    }
 }
+
+
 
 module.exports = FluxoController

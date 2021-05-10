@@ -1,39 +1,33 @@
-$('#fontedodado').selectize({
-    valueField: 'nome',
-    labelField: 'nome',
-    searchField: 'nome',    
-    create: function (input, callback) {
-        $.ajax({
-            url: 'fonteDadosFluxo',
-            data: { 'nome': input },
-            type: 'POST',
-            dataType: 'json',
-            success: function (response) {
-                return callback(response);
-            }
-        });
-    },
-    render: {
-        option: function (item, escape) {
-            console.log(item);
-            return '<div class="text">' + escape(item.nome) + '</div>';
-        },
-        // option_create: function(data, escape){
-        //     return '<div class="text"> Adicionar a fonte '+ escape(data.input) + '</div>';
-        // },
-    },
-    load: function (query, callback) {
-        if (!query.length) return callback();
-        $.ajax({
-            url: '/fonteDadosFluxo/' + query,
-            type: 'GET',
-            dataType: 'json',            
-            error: function () {
-                callback();
+$(document).ready(function () {
+    console.log("ready!");
+
+    $("#fontedodado").select2({
+        tags: false,
+        multiple: false,
+        //tokenSeparators: [',', ' '],
+        minimumInputLength: 2,
+        minimumResultsForSearch: 10,
+        ajax: {
+            url: '/fonteDadosFluxo',
+            dataType: "json",
+            type: "GET",
+            data: function (params) {
+
+                var queryParameters = {
+                    nome: params.term
+                }
+                return queryParameters;
             },
-            success: function (res) {                
-                callback(res);
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            nome: item.tag_value,
+                            id: item.tag_id
+                        }
+                    })
+                };
             }
-        });
-    }
+        }
+    });
 });
