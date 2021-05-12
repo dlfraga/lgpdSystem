@@ -1,4 +1,13 @@
 <html>
+<script>
+    function toggleField(hideObj,showObj){
+          hideObj.disabled=true;        
+          hideObj.style.display='none';
+          showObj.disabled=false;   
+          showObj.style.display='inline';
+          showObj.focus();
+        }
+</script>
 
 <head>
     <meta charset="UTF-8" />
@@ -27,6 +36,31 @@
                         <div class="title">Editar fluxo</div>
 
                         <div class="field">
+                            <label class="label" for="fontedodado">Fonte dos dados pessoais</label>
+                            <div class="select">
+                                <select name="fontedodado" class="column is-fullwidth" onchange="if(this.options[this.selectedIndex].value=='novo'){
+                                    toggleField(this,this.nextSibling);
+                                    this.selectedIndex='0';}">
+                                    <option></option>
+                                    <option value="novo">Digite uma nova</option>
+                                    @each(fluxofonte in fontesDeDados)
+                                    <option>{{fluxofonte.nome}}</option>
+                                    @endeach
+                                </select><input name="fontedodado" class="input" style="display:none;"
+                                    disabled="disabled"
+                                    onblur="if(this.value==''){toggleField(this,this.previousSibling);}">
+                            </div>
+                        </div>
+                        
+
+                        <article class="message is-info">
+                            <div class="message-body">
+                                Adicione a fonte dos dados pessoais deste fluxo. Exemplos de fontes comuns: inscrição de
+                                newsletter no site x, whatsapp, e-mail e ficha de cadastro de novo funcionário.
+                            </div>
+                        </article>
+
+                        <div class="field">
                             <label class="label" for="">Nome do processo de negócio</label>
                             <div class="control">
                                 <input class="input" type="text" name="nomedoprocesso"
@@ -41,21 +75,6 @@
                                 da empresa. Coloque um nome que identifique em qual processo os dados pessoais estão
                                 sendo utilizados, por exemplo <strong> "Inclusão de funcionário"</strong> ou
                                 <strong>"Inscrição em curso"</strong>.
-                            </div>
-                        </article>
-
-                        <div class="field">
-                            <label class="label" for="">Fonte dos dados pessoais</label>
-                            <div class="">
-                                <input class="input" type="text" name="fontedodado" id="fontedodado"
-                                    value="{{fluxoaeditar.fontedodado}}" required>
-                            </div>
-                        </div>
-
-                        <article class="message is-info">
-                            <div class="message-body">
-                                Adicione a fonte dos dados pessoais deste fluxo. Exemplos de fontes comuns: inscrição de
-                                newsletter no site x, whatsapp, e-mail e ficha de cadastro de novo funcionário.
                             </div>
                         </article>
 
@@ -161,6 +180,8 @@
     {{ script('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js') }}
     {{ script ('https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.js')}}
     {{ script('/scripts/general.js') }}
+
+
 </body>
 
 </html>

@@ -4,7 +4,7 @@ const FonteDadosFluxo = use('App/Models/FonteDadosFluxo.js')
 
 class FontedadosfluxoController {
     //NUNCA esquecer dos {} na entrada do método ou o framework os deixa como json e se perdem os metodos
-    async index({ request }) {
+    async index({ request }) {        
         const requestGet = request.get()
         const requestParams = request.params;
 

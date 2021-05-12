@@ -18,7 +18,8 @@ class FluxoController {
         } else if (requestParams.fluxo != null) {
             const fluxoAEditar = request.params.fluxo;
             const fluxoAtual = await Fluxo.find(fluxoAEditar);
-            return view.render('editarfluxo', { fluxoaeditar: fluxoAtual.toJSON() })
+            const fontesDeDados = await FonteDadosFluxo.all();
+            return view.render('editarfluxo', { fluxoaeditar: fluxoAtual.toJSON(), fontesDeDados: fontesDeDados.toJSON() })
             //caso padrao, envia pag 1 com 15 valores
 
         } else {
