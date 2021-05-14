@@ -4,7 +4,7 @@
 const Model = use('Model')
 
 class FonteDadosFluxo extends Model {
-    fluxo() {
+    fluxos() {
         return this.hasMany('App/Models/Fluxo')
     }
 }

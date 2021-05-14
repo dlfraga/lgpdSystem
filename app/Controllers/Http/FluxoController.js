@@ -11,7 +11,7 @@ class FluxoController {
         //sao duas rotas diferentes, uma vem por meusFluxos e outra por fluxos
         //a que pode vir com o parametro pag é meus fluxos
         if (requestParams.pag != null) {
-            const fluxos = await Fluxo.query().with('user').paginate(requestParams.pag, 12);
+            const fluxos = await Fluxo.query().with('user').with('fonteDadosFluxo').paginate(requestParams.pag, 12);
             console.log(fluxos.toJSON())
             return view.render('meusfluxos', { fluxos: fluxos.toJSON() })
             //a rota /fluxos pode enviar o parametro fluxo, considerado aqui. retorna um unico fluxo            
@@ -22,79 +22,71 @@ class FluxoController {
             return view.render('editarfluxo', { fluxoaeditar: fluxoAtual.toJSON(), fontesDeDados: fontesDeDados.toJSON() })
             //caso padrao, envia pag 1 com 15 valores
 
-        } else {
-            const fluxos = await Fluxo.query().with('user').paginate(1, 12);
+        } else {            
+            const fluxos = await Fluxo.query().with('user').with('fonteDadosFluxo').paginate(1, 12);            
             return view.render('meusfluxos', { fluxos: fluxos.toJSON() })
         }
     }
 
-    async store({ request, response, session, auth }) {
+    async store({ auth, session, request, response, params }) {
         const requestParams = request.params;
+        var fluxo = Fluxo;
+
         if (requestParams.fluxo != null) {
-            const fluxo = await await Fluxo.find(request.params.fluxo);
-            fluxo.nomedoprocesso = request.input('nomedoprocesso');
-            fluxo.fontedodado = request.input('fontedodado');
-            fluxo.informacoescoletadas = request.input('informacoescoletadas');
-            fluxo.razao = request.input('razao');
-            fluxo.comoearmazenado = request.input('comoearmazenado');
-            fluxo.protecao = request.input('protecao');
-            fluxo.seguranca = request.input('seguranca');
-            fluxo.prazodeeliminacao = request.input('prazodeeliminacao');
-            fluxo.justificativa = request.input('justificativa');
-            if (request.input('menoresdeidade') == 'true') {
-                fluxo.menoresdeidade = 1;
-            } else {
-                fluxo.menoresdeidade = 0;
-            }
-
-            if (request.input('dadossensiveis') == 'true') {
-                fluxo.dadossensiveis = 1;
-            } else {
-                fluxo.dadossensiveis = 0;
-            }
-
-            await fluxo.save()
-            session.flash({ success: 'Fluxo salvo com sucesso!' })
-            return response.redirect('/meusFluxos')
-
+            fluxo = await await Fluxo.find(request.params.fluxo);
         } else {
-            console.log('fluxonovo')
-            const fluxo = new Fluxo();
+            fluxo = new Fluxo();
             fluxo.user_id = auth.user.id;
-            console.log(auth.user.id);
-            fluxo.nomedoprocesso = request.input('nomedoprocesso');
-            fluxo.fontedodado = request.input('fontedodado');
-            fluxo.informacoescoletadas = request.input('informacoescoletadas');
-            fluxo.razao = request.input('razao');
-            fluxo.comoearmazenado = request.input('comoearmazenado');
-            fluxo.protecao = request.input('protecao');
-            fluxo.seguranca = request.input('seguranca');
-            fluxo.prazodeeliminacao = request.input('prazodeeliminacao');
-            fluxo.justificativa = request.input('justificativa');
-            if (request.input('menoresdeidade') == 'true') {
-                fluxo.menoresdeidade = 1;
-            } else {
-                fluxo.menoresdeidade = 0;
-            }
+        }
+        var fontedodado = FonteDadosFluxo;
+        try {
+            fontedodado = await FonteDadosFluxo.findOrCreate({ nome: request.input('fontedodado') });
+        } catch (error) {
+            session.flash({ error: 'Erro no salvamento da fonte de dados do fluxo!' })
+            return response.redirect('/meusFluxos')            
+        }
 
-            if (request.input('dadossensiveis') == 'true') {
-                fluxo.dadossensiveis = 1;
-            } else {
-                fluxo.dadossensiveis = 0;
-            }
+        fluxo.fonte_dados_fluxo_id = fontedodado.id;
+        fluxo.nomedoprocesso = request.input('nomedoprocesso');
+        fluxo.informacoescoletadas = request.input('informacoescoletadas');
+        fluxo.razao = request.input('razao');
+        fluxo.comoearmazenado = request.input('comoearmazenado');
+        fluxo.protecao = request.input('protecao');
+        fluxo.seguranca = request.input('seguranca');
+        fluxo.prazodeeliminacao = request.input('prazodeeliminacao');
+        fluxo.justificativa = request.input('justificativa');
+        if (request.input('menoresdeidade') == 'true') {
+            fluxo.menoresdeidade = 1;
+        } else {
+            fluxo.menoresdeidade = 0;
+        }
 
+        if (request.input('dadossensiveis') == 'true') {
+            fluxo.dadossensiveis = 1;
+        } else {
+            fluxo.dadossensiveis = 0;
+        }
+
+        try {
             await fluxo.save()
-            session.flash({ success: 'Fluxo salvo com sucesso!' })
+            session.flash({ notification: 'Fluxo salvo com sucesso!' })
+            return response.redirect('/meusFluxos')
+        } catch (error) {
+            session.flash({ error: 'Erro no salvamento do fluxo!' })
+            console.log(error)
             return response.redirect('/meusFluxos')
         }
 
+
+
+
     }
 
-    async remove({ params, response, session}) {
+    async remove({ params, response, session }) {
         if (params.fluxoid != null) {
-            const fluxoASerDeletado = await Fluxo.find(params.fluxoid);            
+            const fluxoASerDeletado = await Fluxo.find(params.fluxoid);
             if (await fluxoASerDeletado.delete()) {
-                session.flash({ notification: 'Fluxo eliminado com sucesso!' })                
+                session.flash({ notification: 'Fluxo eliminado com sucesso!' })
                 return response.redirect('/meusFluxos')
             } else {
                 session.flash({ error: 'Falha ao eliminar!' })

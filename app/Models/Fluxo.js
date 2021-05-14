@@ -9,7 +9,7 @@ class Fluxo extends Model {
     }
 
     fonteDadosFluxo() {
-        return this.hasOne('App/Models/FonteDadosFluxo')
+        return this.belongsTo('App/Models/FonteDadosFluxo')
     }
 
     static castDates(field, value) {
