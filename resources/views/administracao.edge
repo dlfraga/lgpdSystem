@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <title>Meu Perfil</title>
     @include('default_include')
-    {{ script('validations.js') }}
+    {{ script('validations.js') }}    
 </head>
 
 <body>
@@ -144,16 +144,11 @@
                     </div>
                 </div>
             </div>
-            <div class="is-half is-one-quarter">
-                @if(old('notification'))
-                <div class="notification is-success">
-                    {{ old('notification') }}
-                    @endif
-                </div>
-            </div>
+
+            
 
         </div>
     </section>
 </body>
-
+@include('toast_include')
 </html>

@@ -46,20 +46,7 @@
                     </form>
                     <div class="container is-size-7 is-black is-small has-text-weight-bold">
                         <a class="button" href="/esqueciMinhaSenha">Esqueci minha senha</a>
-                    </div>
-                    <div class="column is-fullwidth">
-                        <br>
-                        @if(old('notification'))
-                        <div class="notification is-failure">
-                            {{ old('notification') }}
-                        </div>
-                        @endif
-                        @if(old('error'))
-                        <div class="notification is-danger">
-                            {{ flashMessage('error') }}
-                        </div>
-                        @endif
-                    </div>
+                    </div>                    
                 </div>
 
             </div>
@@ -73,5 +60,5 @@
     </div>
     </section>
 </body>
-
+@include('toast_include')
 </html>

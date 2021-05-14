@@ -40,7 +40,7 @@ class UserController {
                     session.flash({ notification: 'Usuário eliminado!' })
                     response.redirect('/Administracao')
                 } else {
-                    session.flash({ notification: 'Você não pode deletar o seu login!' })
+                    session.flash({ error: 'Você não pode deletar o seu login!' })
                     response.redirect('/Administracao')
                 }
             } else if (params.id != null) {
@@ -77,8 +77,14 @@ class UserController {
                 } else {
                     user.is_admin = 0;
                 }
-                await user.save()
-                session.flash({ notification: 'Usuário adicionado!' })
+                try {
+                    await user.save()    
+                    session.flash({ notification: 'Usuário adicionado!' })
+                } catch (error) {
+                    session.flash({ error: 'Erro na adição do usuário! Verifique se o e-mail já não está cadastrado' })    
+                }
+                
+                //session.flash({ notification: 'Usuário adicionado!' })
                 return response.redirect('/Administracao')
             } else {
                 session.flash({ error: 'Você não tem permissão para criar novos usuários!' })

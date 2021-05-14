@@ -13,22 +13,7 @@
     <div class="container is-fluid">
         <section class="section">
             <div> <a class="button is-primary" href="/novoFluxo">Novo fluxo</a></div>
-            <div class="box">               
-                    @if(old('notification'))
-                    <div class="columns is-centered">
-                     <div class="column is-half notification is-success has-text-centered">
-                        {{ old('notification') }}
-                     </div>
-                    </div>
-                    @endif
-                    @if(old('error'))
-                    <div class="column is-half notification is-success has-text-centered">
-                     <div class="notification is-danger">
-                        {{ flashMessage('error') }}
-                     </div>
-                    </div>
-                    @endif
-                
+            <div class="box">                                                
                 <table class="table is-fullwidth">
                     <thead>
                         <tr>
@@ -141,5 +126,5 @@
         </section>
     </div>
 </body>
-
+@include('toast_include')
 </html>

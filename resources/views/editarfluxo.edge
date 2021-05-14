@@ -38,7 +38,7 @@
                         <div class="field">
                             <label class="label" for="fontedodado">Fonte dos dados pessoais</label>
                             <div class="select">
-                                <select name="fontedodado" class="column is-fullwidth" onchange="if(this.options[this.selectedIndex].value=='novo'){
+                                <select name="fontedodado" autocomplete="off" class="column is-fullwidth" onchange="if(this.options[this.selectedIndex].value=='novo'){
                                     toggleField(this,this.nextSibling);
                                     this.selectedIndex='0';}">
                                     <option></option>
@@ -176,12 +176,9 @@
                 @endif
             </div>
         </div>
-    </section>
-    {{ script('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js') }}
-    {{ script ('https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.js')}}
-    {{ script('/scripts/general.js') }}
-
-
+    </section>        
 </body>
-
+{{ script('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js') }}
+{{ script('/scripts/general.js') }}
+@include('toast_include')
 </html>
