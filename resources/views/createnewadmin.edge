@@ -55,13 +55,7 @@
                           <button class="button is-primary is-fullwidth">Registrar</button>
                         </div>
                       </div>
-                    </form>
-                    <div class="is-half">
-                      @if(old('notification'))
-                      <div class="notification is-success">
-                        {{ old('notification') }}
-                        @endif
-                      </div>
+                    </form>                  
                     </div>
                   </div>
                 </div>
@@ -74,5 +68,5 @@
 
 
 </body>
-
+@include('toast_include')
 </html>

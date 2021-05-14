@@ -146,15 +146,8 @@
                     </div>
                 </div>
             </div>
-        </form>
-        <div class="is-half">
-            @if(old('notification'))
-            <div class="notification is-success">
-                {{ old('notification') }}
-                @endif
-            </div>
-        </div>
+        </form>        
     </section>
 </body>
-
+@include('toast_include')
 </html>

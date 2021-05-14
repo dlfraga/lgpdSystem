@@ -1,0 +1,11 @@
+@if(flashMessage('notification'))
+<script>
+    bulmaToast.toast({ message: '{{ flashMessage('notification') }}', type: 'is-success' })
+</script>
+@endif
+
+@if(flashMessage('error'))
+<script>
+    bulmaToast.toast({ message: '{{ flashMessage('error') }}', type: 'is-danger' })
+</script>
+@endif
