@@ -17,6 +17,7 @@ class UserController {
         }
         try {
             await auth.attempt(email, password)
+            session.flash({ notification: 'Login realizado com sucesso!' })
             return response.redirect('/dashboard')
         } catch (PasswordMismatch) {
             session.flash({ error: 'Erro no login ou senha. Tente novamente' })
@@ -48,7 +49,8 @@ class UserController {
                     const userToBeEdited = await User.find(params.id)                    
                     return view.render('perfil', { perfil: userToBeEdited.toJSON() });
                 } catch (error) {
-                    return 'Usuario nao encontrado!'
+                    session.flash({ error: 'Usuário não encontrado!' })
+                    response.redirect('/Administracao')
                 }
 
             } else {
@@ -80,12 +82,11 @@ class UserController {
                 try {
                     await user.save()    
                     session.flash({ notification: 'Usuário adicionado!' })
+                    return response.redirect('/Administracao')
                 } catch (error) {
                     session.flash({ error: 'Erro na adição do usuário! Verifique se o e-mail já não está cadastrado' })    
-                }
-                
-                //session.flash({ notification: 'Usuário adicionado!' })
-                return response.redirect('/Administracao')
+                    return response.redirect('/Administracao')
+                }                                
             } else {
                 session.flash({ error: 'Você não tem permissão para criar novos usuários!' })
                 return response.redirect('/dashboard')
@@ -117,7 +118,8 @@ class UserController {
                 response.redirect('/dashboard')
             }
         }
-        return 'Erro na ateração de usuarios'
+        session.flash({ error: 'Erro desconhecido' })        
+        response.redirect('/dashboard')
     }
 
     async changeExistingUser(id, request, session, response) {

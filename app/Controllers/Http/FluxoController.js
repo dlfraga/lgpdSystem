@@ -11,8 +11,7 @@ class FluxoController {
         //sao duas rotas diferentes, uma vem por meusFluxos e outra por fluxos
         //a que pode vir com o parametro pag é meus fluxos
         if (requestParams.pag != null) {
-            const fluxos = await Fluxo.query().with('user').with('fonteDadosFluxo').paginate(requestParams.pag, 12);
-            console.log(fluxos.toJSON())
+            const fluxos = await Fluxo.query().with('user').with('fonteDadosFluxo').paginate(requestParams.pag, 12);            
             return view.render('meusfluxos', { fluxos: fluxos.toJSON() })
             //a rota /fluxos pode enviar o parametro fluxo, considerado aqui. retorna um unico fluxo            
         } else if (requestParams.fluxo != null) {
