@@ -1,0 +1,219 @@
+<div class="box">
+    {{ csrfField() }}
+    <div class="container is-fluid">        
+        <div class="columns is-fullwidth is-vcentered">
+            <div class="column">
+                <div class="columns">
+                    <div class="column">
+                        <div class="field box">
+                            <label class="label" for="fontedodado">Fonte dos dados pessoais</label>
+                            <div class="select">
+                                <select name="fontedodado" autocomplete="off" class="column is-fullwidth" onchange="if(this.options[this.selectedIndex].value=='novo'){
+                        toggleField(this,this.nextSibling);
+                        this.selectedIndex='0';}">
+                                    <option>
+                                        @yield(fluxoaeditar.fonteDadosFluxo.nome)
+
+                                        @endyield
+                                    </option>
+                                    <option value="novo">Digite uma nova</option>
+                                    @each(fluxofonte in fontesDeDados)
+                                    <option>{{fluxofonte.nome}}</option>
+                                    @endeach
+                                </select><input name="fontedodado" class="input" style="display:none;"
+                                    disabled="disabled"
+                                    onblur="if(this.value==''){toggleField(this,this.previousSibling);}">
+                            </div>
+                            <p class="help">Adicione a fonte dos dados pessoais deste fluxo como whatsapp ou
+                                e-mails</p>
+                        </div>
+                        <div class="field box">
+                            <label class="label" for="">Nome do processo de negócio</label>
+                            <div class="control">
+                                <input class="input" type="text" name="nomedoprocesso"
+                                    placeholder="Digite um nome para identificar o processo de negócio" 
+                                    @if(fluxoaeditar.nomedoprocesso)
+                                      value="{{fluxoaeditar.nomedoprocesso}}"
+                                    @else
+                                      value=""
+                                    @endif                                    
+                                    required>
+                            </div>
+                            <p class="help">O processo de tratamento de dados pessoais sempre deve servir a
+                                um
+                                processo
+                                de negócio
+                                da empresa. Coloque um nome que identifique em qual processo os dados
+                                pessoais
+                                estão
+                                sendo utilizados, por exemplo <strong> "Inclusão de funcionário"</strong> ou
+                                <strong>"Inscrição em curso"</strong>.</p>
+                        </div>
+
+                        <div class="field box">
+                            <label class="label" for="">Razão</label>
+                            <div class="control">
+                                <input class="input" type="text" name="razao"
+                                    placeholder="Descreva para que estas informações são usadas"
+                                    @if(fluxoaeditar.razao)
+                                    value="{{fluxoaeditar.razao}}"  
+                                    @else
+                                    value=""
+                                    @endif
+                                    >
+                            </div>
+                        </div>
+
+                        <div class="field box">
+                            <label class="label" for="">Mecanismos de Proteção</label>
+                            <div class="control">
+                                <input class="input" type="text" name="protecao"
+                                    placeholder="Descreva quais são as medidas de proteção utilizadas para manter a informação segura"
+                                    @if(fluxoaeditar.protecao)
+                                    value="{{fluxoaeditar.protecao}}"
+                                    @else
+                                      value=""
+                                    @endif
+                                    >
+                            </div>
+                        </div>
+
+                        <div class="field box">
+                            <label class="label" for="">Prazo de eliminação</label>
+                            <div class="control">
+                                <input class="input" type="text" name="field-name"
+                                    placeholder="Quando as informações são eliminadas?"
+                                    @if(fluxoaeditar.prazodeeliminacao)
+                                    value="{{fluxoaeditar.prazodeeliminacao}}"  
+                                    @else
+                                    value=""
+                                    @endif
+                                    >
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="field">
+                                <div class="control">
+                                    <label class="checkbox form-check-label" for="menoresdeidade">
+                                        <input type="checkbox" id="menoresdeidade" name="menoresdeidade" value="true"
+                                        @if(fluxoaeditar.menoresdeidade == 1)
+                                          checked                                                                                  
+                                        @endif
+                                        >
+                                        <span class="ml-1">Os dados incluem informações de menores de
+                                            idade?</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="control">
+                                    <label class="checkbox form-check-label" for="dadossensiveis">
+                                        <input type="checkbox" id="dadossensiveis" name="dadossensiveis" value="true"
+                                        @if(fluxoaeditar.dadosensiveis == 1)
+                                          checked                                                                                  
+                                        @endif
+                                        >
+                                        <span class="ml-1">São obtidos dados sensíveis?</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="field box">
+                            <label class="label" for="setor">Setor</label>
+                            <div class="select">
+                                <select name="setor" autocomplete="off" class="column is-fullwidth" onchange="if(this.options[this.selectedIndex].value=='novo'){
+                        toggleField(this,this.nextSibling);
+                        this.selectedIndex='0';}">
+                                    <option>
+                                        @if(fluxoaeditar.setor.nomedosetor)
+                                        {{fluxoaeditar.setor.nomedosetor}}                                                                                    
+                                        @endif                                        
+                                    </option>
+                                    <option value="novo">Digite uma nova</option>
+                                    @each(setor in setores)
+                                    <option>{{setor.nomedosetor}}</option>
+                                    @endeach
+                                </select><input name="setor" class="input" style="display:none;" disabled="disabled"
+                                    onblur="if(this.value==''){toggleField(this,this.previousSibling);}">
+                            </div>
+                            <p class="help">Adicione o setor da empresa de onde está sendo descrito este
+                                fluxo
+                            </p>
+                        </div>
+                        <div class="field box">
+                            <label class="label" for="">Informações coletadas</label>
+                            <div class="control"><textarea class="textarea" name="informacoescoletadas" rows="3"
+                                    placeholder="Escreva quais são as informações coletadas"
+                                    @if(fluxoaeditar.informacoescoletadas)
+                                    >{{fluxoaeditar.informacoescoletadas}}     
+                                    @else
+                                    >                                                                      
+                                    @endif                                    
+                                </textarea>
+                            </div>
+                            <p class="help">Selecione quais são as informações coletadas neste fluxo.</p>
+                        </div>
+
+                        <div class="field box">
+                            <label class="label" for="">Como é armazenado</label>
+                            <div class="control">
+                                <input class="input" type="text" name="comoearmazenado"
+                                    placeholder="As informações coletadas são armazenadas? Como?"
+                                    @if(fluxoaeditar.comoearmazenado)
+                                    value="{{fluxoaeditar.comoearmazenado}}"  
+                                    @else
+                                    value=""
+                                    @endif
+                                    >
+                            </div>
+                        </div>
+
+                        <div class="field box">
+                            <label class="label" for="">Medidas de segurança</label>
+                            <div class="control"><textarea class="textarea" name="seguranca" rows="3"
+                                    placeholder="O acesso a informação é limitado? Quem tem acesso?"
+                                    @if(fluxoaeditar.seguranca)
+                                    >{{fluxoaeditar.seguranca}}</textarea>
+                                    @else
+                                    ></textarea>
+                                    @endif                                    
+                            </div>
+                        </div>
+
+                        <div class="field box">
+                            <label class="label" for="">Justificativa da LGPD</label>
+                            <div class="control">
+                                <input class="input" type="text" name="justificativa"
+                                @if(fluxoaeditar.justificativa)
+                                value="{{fluxoaeditar.justificativa}}"
+                                @else
+                                  value=""
+                                @endif                                    
+                                    placeholder="Qual é a justificativa de obter a informação, considerando as previstas na LGPD?">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="columns is-centered is-half">   
+
+            <div class="field">
+                <div class="control">
+                    <button class="button is-primary">Salvar</button>                                        
+                </div>                
+            </div>
+            &nbsp
+            <div class="field">
+                <div class="control">
+                <a class="button is-primary is-danger" href="#" onclick="history.go(-1)">Cancelar</a>                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
