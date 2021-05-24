@@ -18,6 +18,7 @@
                     <thead>
                         <tr>
                             <th scope="col">ID #</th>
+                            <th scope="col">Setor</th>
                             <th scope="col">Nome do processo</th>
                             <th scope="col">Origem</th>
                             <th scope="col">Razão</th>
@@ -31,6 +32,7 @@
                     <tbody>
                         <tr>
                             <td>{{fluxo.id}}</td>
+                            <td>{{fluxo.setor.nomedosetor}}</td>       
                             <td>
                                 <a href="/fluxos/{{fluxo.id}}">
                                     <div class="media">
@@ -38,6 +40,7 @@
                                     </div>
                                 </a>
                             </td>
+                                                 
                             <td>{{fluxo.fonteDadosFluxo.nome}}</td>                            
                             <td>
                                 @yield(fluxo.razao)
