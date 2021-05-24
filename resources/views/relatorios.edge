@@ -16,11 +16,11 @@
             @else
             <pre class="mermaidpre">
             <div class="mermaid">
-                graph LR            
+                graph LR             
                 @each(fontedados in fonteDadosFluxos)
                 @if(fontedados.fluxos.lenght != 0)
                 @each(fluxo in fontedados.fluxos)
-                {{--  parent para acessar dados do outerloop                        --}}
+                {{--  parent para acessar dados do outerloop                        --}}             
                 {{ $parent.fontedados.nome }} --> nomedoprocesso{{fluxo.id}}({{fluxo.nomedoprocesso}}) --> razao{{fluxo.id}}({{fluxo.razao}}) --> justificativa{{fluxo.id}}({{fluxo.justificativa}})
                 @endeach
                 @endif

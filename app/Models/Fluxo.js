@@ -12,6 +12,9 @@ class Fluxo extends Model {
         return this.belongsTo('App/Models/FonteDadosFluxo')
     }
 
+    setor() {
+        return this.belongsTo('App/Models/Setor')
+    }
     static castDates(field, value) {
         if (field == 'created_at') {
             value.locale('br');

@@ -1,5 +1,13 @@
 <html>
-
+    <script>
+        function toggleField(hideObj,showObj){
+              hideObj.disabled=true;        
+              hideObj.style.display='none';
+              showObj.disabled=false;   
+              showObj.style.display='inline';
+              showObj.focus();
+            }
+    </script>
 <head>
     <meta charset="UTF-8" />
     <title>Fluxos</title>
@@ -16,33 +24,47 @@
             <div class="container is-fluid">
                 <div class="columns is-fullwidth is-centered">
                     <div class="column is-half">
-                        <!-- <nav class="breadcrumb has-arrow-separator is-small" aria-label="breadcrumbs">
-                            <ul>
-                                <li><a href="#">Novo fluxo</a></li>
-                                <li class="is-active"><a href="#" aria-current="page">Nome do processo</a></li>
-                            </ul>
-                        </nav> -->
                         <div class="title">Novo fluxo</div>
-
-
-                        <div class="field">
+                        
+                        <div class="field ">
                             <label class="label" for="fontedodado">Fonte dos dados pessoais</label>
-                            <input autofocus type="text" class="input" list="fontedodado" name="fontedodado" />
                             <div class="select">
-                                <datalist id="fontedodado">
+                                <select name="fontedodado" autocomplete="off" class="column is-fullwidth" onchange="if(this.options[this.selectedIndex].value=='novo'){
+                                    toggleField(this,this.nextSibling);
+                                    this.selectedIndex='0';}">
+                                    <option></option>
+                                    <option value="novo">Digite uma nova</option>
                                     @each(fluxofonte in fontesDeDados)
                                     <option>{{fluxofonte.nome}}</option>
                                     @endeach
-                                </datalist>                                
+                                </select><input name="fontedodado" class="input" style="display:none;"
+                                    disabled="disabled"
+                                    onblur="if(this.value==''){toggleField(this,this.previousSibling);}">
                             </div>
+                            <p class="help">Adicione a fonte dos dados pessoais deste fluxo como whatsapp ou e-mails</p>
                         </div>
 
-                        <article class="message is-info">
-                            <div class="message-body">
-                                Adicione a fonte dos dados pessoais deste fluxo. Exemplos de fontes comuns: inscrição de
-                                newsletter no site x, whatsapp, e-mail e ficha de cadastro de novo funcionário.
+                        
+
+                        <div class="field">
+                            <label class="label" for="setor">Setor</label>
+                            <div class="select">
+                                <select name="setor" autocomplete="off" class="column is-fullwidth" onchange="if(this.options[this.selectedIndex].value=='novo'){
+                                    toggleField(this,this.nextSibling);
+                                    this.selectedIndex='0';}">
+                                    <option></option>
+                                    <option value="novo">Digite uma nova</option>
+                                    @each(setor in setores)
+                                    <option>{{setor.nomedosetor}}</option>
+                                    @endeach
+                                </select><input name="setor" class="input" style="display:none;"
+                                    disabled="disabled"
+                                    onblur="if(this.value==''){toggleField(this,this.previousSibling);}">
                             </div>
-                        </article>
+                            <p class="help">Adicione o setor da empresa de onde está sendo descrito este fluxo</p>
+                        </div>
+
+                      
 
                         <div class="field">
                             <label class="label" for="">Nome do processo de negócio</label>
@@ -50,29 +72,20 @@
                                 <input class="input" type="text" name="nomedoprocesso"
                                     placeholder="Digite um nome para identificar o processo de negócio" required>
                             </div>
-                        </div>
-
-                        <article class="message is-info">
-                            <div class="message-body">
-                                O processo de tratamento de dados pessoais sempre deve servir a um processo de negócio
+                            <p class="help">O processo de tratamento de dados pessoais sempre deve servir a um processo de negócio
                                 da empresa. Coloque um nome que identifique em qual processo os dados pessoais estão
                                 sendo utilizados, por exemplo <strong> "Inclusão de funcionário"</strong> ou
-                                <strong>"Inscrição em curso"</strong>.
-                            </div>
-                        </article>
+                                <strong>"Inscrição em curso"</strong>.</p>
+                        </div>
+
 
 
                         <div class="field">
                             <label class="label" for="">Informações coletadas</label>
                             <div class="control"><textarea class="textarea" name="informacoescoletadas" rows="3"
                                     placeholder="Escreva quais são as informações coletadas"></textarea></div>
-                        </div>
-
-                        <article class="message is-info">
-                            <div class="message-body">
-                                Selecione quais são as informações coletadas neste fluxo.
-                            </div>
-                        </article>
+                                    <p class="help">Selecione quais são as informações coletadas neste fluxo.</p>
+                        </div>                      
 
                         <div class="field">
                             <label class="label" for="">Razão</label>
@@ -150,4 +163,6 @@
     </section>
 </body>
 @include('toast_include')
+{{ script('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js') }}
+{{ script('/scripts/general.js') }}
 </html>

@@ -36,7 +36,7 @@ Route.get('/meusFluxos/:pag?', 'FluxoController.index').middleware('auth');
 /**Resources completos=>  */
 
 /** Paginas de edição de fluxo */
-Route.on('/novoFluxo').render('novofluxo').middleware('auth');
+Route.get('/novoFluxo', 'FluxoController.new').middleware('auth');
 Route.on('/editarFluxo').render('editarFluxo').middleware('auth');
 Route.resource('/fluxos/:fluxo?', 'FluxoController').middleware('auth');
 Route.get('/eliminarFluxo/:fluxoid', 'FluxoController.remove').middleware('auth');

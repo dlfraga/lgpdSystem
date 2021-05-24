@@ -11,54 +11,45 @@
     <section class="section">
         <div class="container">
             <div class="logo"></div>
-            <div class="subtitle">
-                @loggedIn
-                <h2> Olá {{ auth.user.username }} Você já está logado. Redirecionando</h2>
-                <meta http-equiv="refresh" content="1; URL='/dashboard'" />
-                @else
-                <div class="loginBox">
-                    <form action="/login" method="POST">
-                        {{ csrfField() }}
-                        <section class="section">
-                            <div class="container has-text-centered">
-                                <div class="box">
-                                    <div class="title">                                       
-                                        lgpdSystem
-                                    </div>
-                                    <p class="subtitle">Você não está logado. Por favor realize o login no sistema</p>
-                                    <div class="columns is-centered">
-                                        <div class="column is-4 is-4-desktop">
-                                            <div class="field">
-                                                <div class="control">
-                                                    <input class="input" type="email" name="email" placeholder="Email">
-                                                </div>
-                                            </div>
-                                            <div class="field">
-                                                <div class="control">
-                                                    <input class="input" type="password" name="password"
-                                                        placeholder="Senha">
-                                                </div>
-                                            </div>
-                                            <div class="field">
-                                                <button
-                                                    class="button is-primary is-focused is-medium is-fullwidth">Login</button>
-                                            </div>
-                    </form>
-                    <div class="container is-size-7 is-black is-small has-text-weight-bold">
-                        <a class="button" href="/esqueciMinhaSenha">Esqueci minha senha</a>
-                    </div>                    
-                </div>
 
+            @loggedIn
+            <h2> Olá {{ auth.user.username }} Você já está logado. Redirecionando</h2>
+            <meta http-equiv="refresh" content="1; URL='/dashboard'" />
+            @else
+
+            <div class="columns is-vcentered is-centered has-text-centered">
+                <form action="/login" method="POST">
+                    <div class="box">
+                        {{ csrfField() }}
+                        <div class="title">
+                            lgpdSystem
+                        </div>
+                        <p class="subtitle">Você não está logado. Por favor realize o login no sistema</p>
+                        <div class="column is-narrow">
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input" type="email" name="email" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input" type="password" name="password" placeholder="Senha">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <button class="button submit is-primary is-focused is-medium">Login</button>
+                            </div>
+                            <div class="is-size-4">
+                                <a class="button is-ghost is-light is-small" href="/esqueciMinhaSenha">Esqueci minha senha</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-        </div>
-    </section>
-    </form>
-    </div>
-    @endloggedIn
-    </div>
-    </div>
+        @endloggedIn
     </section>
 </body>
 @include('toast_include')
+
 </html>
