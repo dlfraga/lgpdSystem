@@ -8,7 +8,6 @@ class FluxoSchema extends Schema {
     this.create('fluxos', (table) => {
       table.increments()
       table.string('nomedoprocesso', 254)
-      table.string('fontedodado', 254)
       table.string('informacoescoletadas')
       table.string('razao')
       table.string('comoearmazenado')

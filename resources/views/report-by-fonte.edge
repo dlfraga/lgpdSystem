@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Relatórios</title>
+    @include('default_include')
+</head>
+
+<body>
+    @include('menu') 
+    <section class="section">
+        <div class="box">
+            @if(fonteDadosFluxos == null)
+            Sem fluxos criados!
+            @else
+            <pre class="mermaidpre">
+            <div class="mermaid">
+                graph LR             
+                @each(fontedados in fonteDadosFluxos)
+                @if(fontedados.fluxos.lenght != 0)
+                @each(fluxo in fontedados.fluxos)
+                {{--  parent para acessar dados do outerloop                        --}}             
+                {{ $parent.fontedados.nome }} --> 
+                setor{{fluxo.setor.nomedosetor}}({{fluxo.setor.nomedosetor}})--> 
+                nomedoprocesso{{fluxo.id}}({{fluxo.nomedoprocesso}}) -->
+                razao{{fluxo.id}}({{fluxo.razao}}) --> 
+                justificativa{{fluxo.id}}({{fluxo.justificativa}}) -->
+                prazodeeliminacao{{fluxo.id}}({{fluxo.prazodeeliminacao}})
+                @endeach
+                @endif
+                @endeach                
+        </div>
+    </pre>
+            @endif
+        </div>
+    </section>
+</body>
+@include('toast_include')
+
+<style>
+    .mermaidpre {
+        all: initial;
+
+        * {
+            all: unset;
+        }
+    }
+
+    .label {
+        all: initial;
+
+        * {
+            all: unset;
+        }
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+    mermaid.initialize({startOnLoad:true});
+</script>
+
+</html>

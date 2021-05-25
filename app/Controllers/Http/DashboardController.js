@@ -10,14 +10,14 @@ class DashboardController {
 
         //verifica se os campos principais estão como null
         //@if(fluxo.razao == null || fluxo.justificativa == null || fluxo.comoearmazenado == null ||        prazodeeliminacao == null || protecao == null)
-        const fluxosComJustificativaCount = await Database.from('fluxos')
+        const fluxosConcluidosQuery = await Database.from('fluxos')
             .whereNotNull('justificativa')
             .orWhereNotNull('razao')
             .orWhereNotNull('comoearmazenado')
             .orWhereNotNull('prazodeeliminacao')
             .orWhereNotNull('protecao')
             .count();
-        const fluxosConcluidos = fluxosComJustificativaCount[0]['count(*)']
+        const fluxosConcluidos = fluxosConcluidosQuery[0]['count(*)']
 
         return view.render('dashboard', { fluxosCount: fluxosTotal, fluxosConcluidos: fluxosConcluidos })
     }

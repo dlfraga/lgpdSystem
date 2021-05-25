@@ -10,51 +10,119 @@
 <body>
     @include('menu')
     <section class="section">
-        <div class="box">
-            @if(fonteDadosFluxos == null)
-            Sem fluxos criados!
-            @else
-            <pre class="mermaidpre">
-            <div class="mermaid">
-                graph LR             
-                @each(fontedados in fonteDadosFluxos)
-                @if(fontedados.fluxos.lenght != 0)
-                @each(fluxo in fontedados.fluxos)
-                {{--  parent para acessar dados do outerloop                        --}}             
-                {{ $parent.fontedados.nome }} --> nomedoprocesso{{fluxo.id}}({{fluxo.nomedoprocesso}}) --> razao{{fluxo.id}}({{fluxo.razao}}) --> justificativa{{fluxo.id}}({{fluxo.justificativa}})
-                @endeach
-                @endif
-                @endeach                
+        <div class="column">
+            <div class="box">
+                <div class="columns is-multiline is-vcentered is-mobile is-centered">
+                    <div class="column is-full">
+                        <h1 class="title">Diagramas</h1>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <div class="box">                            
+                            <a href="/relatorios?tipo=fluxosPorFonte">
+                                <h3 class="title is-4">Fluxos - Por fonte</h3>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <figure class="image is-48x48"><img src="/images/flow.svg" alt="">
+                                        </figure>
+                                    </div>
+                                    <div class="media-content">
+                                        <h4 class="title is-2 has-text-right">
+                                            
+                                            @if(fontesTotal == 0)
+                                            0
+                                            @else
+                                            {{fontesTotal}}
+                                            @endif
+                                        </h4>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <div class="box">
+                            <a href="/relatorios?tipo=fluxosPorSetor">
+                                <h3 class="title is-4">Fluxos - Por setor</h3>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <figure class="image is-48x48"><img src="/images/pause.svg" alt="">
+                                        </figure>
+                                    </div>
+                                    <div class="media-content">
+                                        <h4 class="title is-2 has-text-right">
+                                            @if(setorTotal == 0)
+                                            0
+                                            @else
+                                            {{setorTotal}}
+                                            @endif
+                                        </h4>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <div class="box">
+                            <a href="/relatorios?tipo=fluxosPorUsuario">
+                                <h3 class="title is-4">Fluxos - Por usuário</h3>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <figure class="image is-48x48"><img src="/images/complete.svg" alt="">
+                                        </figure>
+                                    </div>
+                                    <div class="media-content">
+                                        <h4 class="title is-2 has-text-right">
+                                            @if(usersTotal == 0)
+                                            0
+                                            @else
+                                            {{usersTotal}}
+                                            @endif
+                                        </h4>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </pre>
-            @endif
+
+        <div class="column">
+            <div class="box">
+                <div class="columns is-multiline is-vcentered is-mobile is-centered">
+                    <div class="column is-full">
+                        <h1 class="title">Relatórios</h1>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <div class="box">
+                            <a href="/relatorios?tipo=todosOsFluxos">
+                                <h3 class="title is-4">Todos os fluxos</h3>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <figure class="image is-48x48"><img src="/images/flow.svg" alt="">
+                                        </figure>
+                                    </div>
+                                    <div class="media-content">
+                                        <h4 class="title is-2 has-text-right">
+                                            @if(fluxosTotal == 0)
+                                            0
+                                            @else
+                                            {{fluxosTotal}}
+                                            @endif
+                                        </h4>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
         </div>
+
     </section>
 </body>
 @include('toast_include')
-
-<style>
-    .mermaidpre {
-        all: initial;
-
-        * {
-            all: unset;
-        }
-    }
-
-    .label {
-        all: initial;
-
-        * {
-            all: unset;
-        }
-    }
-</style>
-
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>
-    mermaid.initialize({startOnLoad:true});
-</script>
-
 
 </html>
