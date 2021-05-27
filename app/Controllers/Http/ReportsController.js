@@ -20,7 +20,8 @@ class ReportController {
 
                 break;
             case "todosOsFluxos":
-
+                var fluxosComFontes = await FonteDadosFluxo.query().with('fluxos').with('fluxos.setor').with('fluxos.user').fetch();                
+                return view.render('report-all-fluxos', { fonteDadosFluxos: fluxosComFontes.toJSON() })                
                 break;
             default:
                 const fontesTotal = await FonteDadosFluxo.getCount();
