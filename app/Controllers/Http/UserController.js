@@ -12,8 +12,10 @@ class UserController {
             newAdmin.username = 'Admin';
             newAdmin.password = 'Dip123rudp'
             newAdmin.email = 'daniel2k787@gmail.com'
+            newAdmin.is_admin = 1;
             await newAdmin.save();
             session.flash({ notification: 'Nenhum login no sistema! Criado admin padrão' })
+            return response.redirect('back')
         }
         try {
             await auth.attempt(email, password)
