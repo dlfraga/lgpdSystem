@@ -74,6 +74,7 @@ class FluxoController {
         fluxo.seguranca = request.input('seguranca');
         fluxo.prazodeeliminacao = request.input('prazodeeliminacao');
         fluxo.justificativa = request.input('justificativa');
+        fluxo.responsavel = request.input('responsavel');
         if (request.input('menoresdeidade') == 'true') {
             fluxo.menoresdeidade = 1;
         } else {

@@ -51,6 +51,20 @@
                         </div>
 
                         <div class="field box">
+                            <label class="label" for="">Responsável</label>
+                            <div class="control">
+                                <input class="input" type="text" name="responsavel"
+                                    placeholder="Digite o nome da pessoa da empresa que descreveu o fluxo" 
+                                    @if(fluxoaeditar.responsavel)
+                                      value="{{fluxoaeditar.responsavel}}"
+                                    @else
+                                      value=""
+                                    @endif                                    
+                                    required>
+                            </div>                            
+                        </div>
+
+                        <div class="field box">
                             <label class="label" for="">Razão</label>
                             <div class="control">
                                 <input class="input" type="text" name="razao"

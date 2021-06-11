@@ -23,7 +23,8 @@
                             <th scope="col">Origem</th>
                             <th scope="col">Razão</th>
                             <th class="has-text-centered" scope="col">Status</th>
-                            <th class="has-text-centered" scope="col">Autor</th>
+                            <th class="has-text-centered" scope="col">Escrito por</th>
+                            <th class="has-text-centered" scope="col">Responsável</th>
                             <th class="has-text-centered" scope="col">Data de inclusão</th>
                             <th class="has-text-centered" scope="col">Ações</th>
                         </tr>
@@ -54,6 +55,11 @@
                             <td class="has-text-centered"><span class="tag is-sucess">Concluído</span></td>
                             @endif
                             <td class="has-text-centered">{{fluxo.user.username}}</td>
+                            <td class="has-text-centered">
+                                @yield(fluxo.responsavel)
+                                Não preenchido
+                                @endyield
+                            </td>                            
                             <td class="has-text-centered">{{fluxo.created_at}}</td>
                             <td class="has-text-centered">
                                 <a class="button" href="/fluxos/{{fluxo.id}}">
