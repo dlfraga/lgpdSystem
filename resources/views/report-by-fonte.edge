@@ -20,17 +20,18 @@
                 @each(fontedados in fonteDadosFluxos)
                 @if(fontedados.fluxos.lenght != 0)
                 @each(fluxo in fontedados.fluxos)
-                {{--  parent para acessar dados do outerloop                        --}}             
-                {{ $parent.fontedados.nome }} --> 
-                setor{{fluxo.setor.nomedosetor}}({{fluxo.setor.nomedosetor}})--> 
-                nomedoprocesso{{fluxo.id}}({{fluxo.nomedoprocesso}}) -->
-                razao{{fluxo.id}}({{fluxo.razao}}) --> 
-                justificativa{{fluxo.id}}({{fluxo.justificativa}}) -->
-                prazodeeliminacao{{fluxo.id}}({{fluxo.prazodeeliminacao}})
+                {{--  parent para acessar dados do outerloop                        --}}                             
+                info{{fluxo.id}}({{fluxo.infocoletadatruncada}})--> 
+                |Que vem de|{{ $parent.fontedados.nome }} --> 
+                |Para o setor|setor{{fluxo.setor.id}}({{fluxo.setor.nomedosetor}})--> 
+                |Na|nomedoprocesso{{fluxo.id}}({{fluxo.nomedoprocesso}}) -->
+                |Devido a|razao{{fluxo.id}}({{fluxo.razao}}) --> 
+                |Justificativa|justificativa{{fluxo.id}}({{fluxo.justificativa}}) -->
+                |E é armazenado por|prazodeeliminacao{{fluxo.id}}({{fluxo.prazodeeliminacao}})
                 @endeach
                 @endif
                 @endeach                
-        </div>
+            </div>
     </pre>
             @endif
         </div>

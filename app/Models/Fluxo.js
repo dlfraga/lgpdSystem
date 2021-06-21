@@ -22,6 +22,26 @@ class Fluxo extends Model {
         }
         return super.formatDates(field, value)
     }
+    static get computed() {
+        return ['infocoletadatruncada']
+    }
+    //o nome da funcao pode ter a primeira palavra depois do get capitalizada, o restante precisa estar em minusculo
+    getInfocoletadatruncada({informacoescoletadas}){
+        var informacaoColetadaModificada = informacoescoletadas.trim();
+        if(informacaoColetadaModificada.length > 15){
+            var infotruncada = informacaoColetadaModificada.slice(0, 15);
+            infotruncada = infotruncada.replace(/(?:\r\n|\r|\n)/g, '<br>');
+            infotruncada += "..."
+            return infotruncada.replace(/^(.)|\s(.)/g, ($1) => {
+                return $1.toUpperCase()
+              })            
+        } else {
+            informacaoColetadaModificada = informacaoColetadaModificada.replace(/(?:\r\n|\r|\n)/g, '<br>');
+            return informacaoColetadaModificada.replace(/^(.)|\s(.)/g, ($1) => {
+                return $1.toUpperCase()
+              })
+        }        
+    }
 }
 
 module.exports = Fluxo
