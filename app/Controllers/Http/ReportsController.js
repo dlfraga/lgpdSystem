@@ -11,12 +11,11 @@ class ReportController {
         switch (tipoDeRelatorio) {
             case "fluxosPorFonte":
                 //carregamento de NESTED RELATIONS https://legacy.adonisjs.com/docs/4.1/relationships dot notation aplicada na ultima relação
-                const fonteDadosFluxos = await FonteDadosFluxo.query().with('fluxos').with('fluxos.setor').fetch();     
-                console.log(fonteDadosFluxos.toJSON()[1])         
+                const fonteDadosFluxos = await FonteDadosFluxo.query().with('fluxos').with('fluxos.setor').fetch();                     
                 return view.render('report-by-fonte', { fonteDadosFluxos: fonteDadosFluxos.toJSON() })
             case "fluxosPorSetor":
-                const setor = await Setor.query.with('fluxos').fetch();
-                return view.render('report-by-setor', { setor: setor.toJSON() })
+                const setor = await Setor.query().with('fluxos').with('fluxos.fonteDadosFluxo').fetch();                
+                return view.render('report-by-setor', { setores: setor.toJSON() })
             case "fluxosPorUsuario":
 
                 break;
