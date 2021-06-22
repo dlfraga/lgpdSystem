@@ -50,10 +50,10 @@
                                     </div>
                                     <div class="media-content">
                                         <h4 class="title is-2 has-text-right">
-                                            @if(setorTotal == 0)
+                                            @if(setoresTotal == 0)
                                             0
                                             @else
-                                            {{setorTotal}}
+                                            {{setoresTotal}}
                                             @endif
                                         </h4>
                                     </div>
@@ -63,8 +63,8 @@
                     </div>
                     <div class="column is-one-fifth">
                         <div class="box">
-                            <a href="/relatorios?tipo=fluxosPorUsuario">
-                                <h3 class="title is-4">Fluxos - Por usuário</h3>
+                            <a href="/relatorios?tipo=lista">
+                                <h3 class="title is-4">Fluxos - Lista em diagramas</h3>
                                 <div class="media">
                                     <div class="media-left">
                                         <figure class="image is-48x48"><img src="/images/users-alt-3.svg" alt="">
@@ -72,10 +72,10 @@
                                     </div>
                                     <div class="media-content">
                                         <h4 class="title is-2 has-text-right">
-                                            @if(usersTotal == 0)
+                                            @if(fluxosTotal == 0)
                                             0
                                             @else
-                                            {{usersTotal}}
+                                            {{fluxosTotal}}
                                             @endif
                                         </h4>
                                     </div>

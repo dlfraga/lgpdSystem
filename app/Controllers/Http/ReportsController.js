@@ -14,18 +14,17 @@ class ReportController {
                 const fonteDadosFluxos = await FonteDadosFluxo.query().with('fluxos').with('fluxos.setor').fetch();                     
                 return view.render('report-by-fonte', { fonteDadosFluxos: fonteDadosFluxos.toJSON() })
             case "fluxosPorSetor":
-                const setor = await Setor.query().with('fluxos').with('fluxos.fonteDadosFluxo').fetch();                
+                var setor = await Setor.query().with('fluxos').with('fluxos.fonteDadosFluxo').fetch();                
                 return view.render('report-by-setor', { setores: setor.toJSON() })
-            case "fluxosPorUsuario":
-
-                break;
+            case "lista":
+                var fluxosComFontesESetores = await Fluxo.query().with('setor').with('user').with('fonteDadosFluxo').fetch();                                
+                return view.render('report-by-lista', { fluxos: fluxosComFontesESetores.toJSON() })                
             case "todosOsFluxos":
-                var fluxosComFontes = await FonteDadosFluxo.query().with('fluxos').with('fluxos.setor').with('fluxos.user').fetch();                
-                return view.render('report-all-fluxos', { fonteDadosFluxos: fluxosComFontes.toJSON() })                
-                break;
+                var fluxosComFontesESetores = await FonteDadosFluxo.query().with('fluxos').with('fluxos.setor').with('fluxos.user').fetch();                
+                return view.render('report-all-fluxos', { fonteDadosFluxos: fluxosComFontesESetores.toJSON() })                                
             default:
                 const fontesTotal = await FonteDadosFluxo.getCount();
-                const setoresTotal = await Setor.getCount();
+                const setoresTotal = await Setor.getCount();                
                 const usersTotal = await User.getCount();
                 const fluxosTotal = await Fluxo.getCount();
                 return view.render('relatorios', { fontesTotal: fontesTotal, setoresTotal: setoresTotal, usersTotal: usersTotal, fluxosTotal: fluxosTotal })
