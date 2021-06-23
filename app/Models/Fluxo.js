@@ -15,6 +15,7 @@ class Fluxo extends Model {
     setor() {
         return this.belongsTo('App/Models/Setor')
     }
+    //altera as datas para o locale br
     static castDates(field, value) {
         if (field == 'created_at') {
             value.locale('br');
@@ -26,6 +27,8 @@ class Fluxo extends Model {
         return ['infocoletadatruncada']
     }
     //o nome da funcao pode ter a primeira palavra depois do get capitalizada, o restante precisa estar em minusculo
+    //a função abaixo retorna um objeto json truncado para o campo 'informacoes coletadas' com outro nome, a fim de ser utilizado na geração dos gráficos
+    //adicionalmente ele troca os carriages return (\r\n) por line breaks (<br>) para que os campos remanescentes apareçam no gráfico corretamente
     getInfocoletadatruncada({informacoescoletadas}){
         var informacaoColetadaModificada = informacoescoletadas.trim();
         if(informacaoColetadaModificada.length > 15){
