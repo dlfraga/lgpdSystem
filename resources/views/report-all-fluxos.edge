@@ -10,11 +10,12 @@
 <body>
     @include('menu')
     <section class="section">
+        <a class="button" href="/relatorios/exportar/xlsx?relatorio=todos">Exportar para excel este relatório</a>
         <table class="table is-striped is-hoverable has-text-centered">
             <thead>
                 <th>Fonte</th>
                 <th>Setor</th>
-                <th>Autor</th>
+                <th>Responsável</th>
                 <th>Processo</th>
                 <th>Informações coletadas</th>
                 <th>Razao</th>
@@ -40,7 +41,11 @@
                     @endif
 
                     <td>{{fluxo.setor.nomedosetor}}</td>
-                    <td>{{fluxo.user.username}}</td>
+                    @if(fluxo.responsavel == null)
+                    <td>Desconhecido</td>
+                    @else
+                    <td>{{fluxo.responsavel}}</td>  
+                    @endif                    
                     <td>{{fluxo.nomedoprocesso}}</td>
                     <td>{{fluxo.informacoescoletadas}}</td>
                     <td>{{fluxo.razao}}</td>

@@ -55,3 +55,5 @@ Route.get('/meuPerfil', 'UserController.meuPerfil').middleware('auth');
 
 /**Relatorios*/
 Route.resource('/Relatorios', 'ReportsController').middleware('auth');
+/**Exportacao de relatorios */
+Route.get('/Relatorios/exportar/:formato', 'ExcelExportController.download').middleware('auth');
