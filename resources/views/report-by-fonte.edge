@@ -22,7 +22,7 @@
                 @each(fluxo in fontedados.fluxos)
                 {{--  parent para acessar dados do outerloop                        --}}                             
                 info{{fluxo.id}}({{fluxo.infocoletadatruncada}})--> 
-                |Que vem de|{{$parent.fontedados.nome}}({{ $parent.fontedados.nome }})--> 
+                |Que vem de|{{$parent.fontedados.id}}({{ $parent.fontedados.nome }})--> 
                 |Para o setor|setor{{fluxo.setor.id}}({{fluxo.setor.nomedosetor}})--> 
                 |Na|nomedoprocesso{{fluxo.id}}({{fluxo.nomedoprocesso}}) -->
                 |Devido a|razao{{fluxo.id}}({{fluxo.razao}}) --> 
@@ -56,9 +56,10 @@
         }
     }
 </style>
-
+<!--
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 <script>
     mermaid.initialize({startOnLoad:true});
 </script>
+-->
 </html>
