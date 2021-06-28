@@ -10,71 +10,83 @@
 <body>
     @include('menu')
     <section class="section">
-        <a class="button" href="/relatorios/exportar/xlsx?relatorio=todos">Exportar para excel este relatório</a>
-        <table class="table is-striped is-hoverable has-text-centered">
-            <thead>
-                <th>Fonte</th>
-                <th>Setor</th>
-                <th>Responsável</th>
-                <th>Processo</th>
-                <th>Informações coletadas</th>
-                <th>Razao</th>
-                <th>Armazenamento</th>
-                <th>Proteção</th>
-                <th>Segurança</th>
-                <th>Prazo</th>
-                <th>Justificativa</th>
-                <th>Menores?</th>
-                <th>Dados Sensiveis?</th>
-            </thead>
-            <tbody>
-                @each(fontedados in fonteDadosFluxos)
-                @if(fontedados.fluxos.lenght != 0)
-                @each(fluxo in fontedados.fluxos)
-                {{--  parent para acessar dados do outerloop                        --}}
-                <tr>
-                    @if($loop.total > 1 && $loop.index == 0)
-                    <td rowspan="{{ $loop.total }}" style="vertical-align: middle">{{$parent.fontedados.nome}}</td>
-                    @elseif($loop.total > 1)
-                    @else
-                    <td>{{$parent.fontedados.nome}}</td>
-                    @endif
+        <div class="columns">
+            <div class="column">
+                <a class="button is-primary" href="/relatorios/exportar/xlsx?relatorio=todos">Exportar relatório</a>
+            </div>
+        </div>
 
-                    <td>{{fluxo.setor.nomedosetor}}</td>
-                    @if(fluxo.responsavel == null)
-                    <td>Desconhecido</td>
-                    @else
-                    <td>{{fluxo.responsavel}}</td>  
-                    @endif                    
-                    <td>{{fluxo.nomedoprocesso}}</td>
-                    <td>{{fluxo.informacoescoletadas}}</td>
-                    <td>{{fluxo.razao}}</td>
-                    <td>{{fluxo.comoearmazenado}}</td>
-                    <td>{{fluxo.protecao}}</td>
-                    <td>{{fluxo.seguranca}}</td>
-                    <td>{{fluxo.prazodeeliminacao}}</td>
-                    <td>{{fluxo.justificativa}}</td>
-                    <td>
-                        @if(fluxo.menoresdeidade == "true")
-                        Sim
-                        @else
-                        Não
+        <div class="columns">
+            <div class="column">
+                <table class="table is-striped is-hoverable has-text-centered">
+                    <thead>
+                        <th>Fonte</th>
+                        <th>Setor</th>
+                        <th>Responsável</th>
+                        <th>Processo</th>
+                        <th>Informações coletadas</th>
+                        <th>Razao</th>
+                        <th>Armazenamento</th>
+                        <th>Proteção</th>
+                        <th>Segurança</th>
+                        <th>Prazo</th>
+                        <th>Justificativa</th>
+                        <th>Menores?</th>
+                        <th>Dados Sensiveis?</th>
+                    </thead>
+                    <tbody>
+                        @each(fontedados in fonteDadosFluxos)
+                        @if(fontedados.fluxos.lenght != 0)
+                        @each(fluxo in fontedados.fluxos)
+                        {{--  parent para acessar dados do outerloop                        --}}
+                        <tr>
+                            @if($loop.total > 1 && $loop.index == 0)
+                            <td rowspan="{{ $loop.total }}" style="vertical-align: middle">{{$parent.fontedados.nome}}</td>
+                            @elseif($loop.total > 1)
+                            @else
+                            <td>{{$parent.fontedados.nome}}</td>
+                            @endif
+        
+                            <td>{{fluxo.setor.nomedosetor}}</td>
+                            @if(fluxo.responsavel == null)
+                            <td>Desconhecido</td>
+                            @else
+                            <td>{{fluxo.responsavel}}</td>  
+                            @endif                    
+                            <td>{{fluxo.nomedoprocesso}}</td>
+                            <td>{{fluxo.informacoescoletadas}}</td>
+                            <td>{{fluxo.razao}}</td>
+                            <td>{{fluxo.comoearmazenado}}</td>
+                            <td>{{fluxo.protecao}}</td>
+                            <td>{{fluxo.seguranca}}</td>
+                            <td>{{fluxo.prazodeeliminacao}}</td>
+                            <td>{{fluxo.justificativa}}</td>
+                            <td>
+                                @if(fluxo.menoresdeidade == "true")
+                                Sim
+                                @else
+                                Não
+                                @endif
+                            </td>
+                            <td>
+                            @if(fluxo.dadossensiveis == "true")
+                            Sim
+                            @else
+                            Não
+                            @endif
+                            </td>
+                        </tr>
+                        @endeach
                         @endif
-                    </td>
-                    <td>
-                    @if(fluxo.dadossensiveis == "true")
-                    Sim
-                    @else
-                    Não
-                    @endif
-                    </td>
-                </tr>
-                @endeach
-                @endif
-                @endeach
-            </tbody>
+                        @endeach
+                    </tbody>
+        
+                </table>
+            </div>
+        </div>
 
-        </table>
+        
+        
     </section>
 </body>
 @include('toast_include')
