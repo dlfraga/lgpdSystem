@@ -108,12 +108,12 @@
                         <div class="box">
                             <div class="field">
                                 <div class="control">
-                                    <label class="checkbox form-check-label" for="menoresdeidade">
-                                        <input type="checkbox" id="menoresdeidade" name="menoresdeidade" value="true"
+                                    <label class="checkbox form-check-label" for="menoresdeidade">                                        
                                         @if(fluxoaeditar.menoresdeidade == 1)
-                                          checked                                                                                  
-                                        @endif
-                                        >
+                                        <input type="checkbox" id="menoresdeidade" name="menoresdeidade" value="true" checked>
+                                        @else
+                                        <input type="checkbox" id="menoresdeidade" name="menoresdeidade" value="true">
+                                        @endif                                                                                
                                         <span class="ml-1">Os dados incluem informações de menores de
                                             idade?</span>
                                     </label>
@@ -122,12 +122,12 @@
 
                             <div class="field">
                                 <div class="control">
-                                    <label class="checkbox form-check-label" for="dadossensiveis">
-                                        <input type="checkbox" id="dadossensiveis" name="dadossensiveis" value="true"
-                                        @if(fluxoaeditar.dadosensiveis == 1)
-                                          checked                                                                                  
-                                        @endif
-                                        >
+                                    <label class="checkbox form-check-label" for="dadossensiveis">                                        
+                                        @if(fluxoaeditar.dadossensiveis == 1)
+                                        <input type="checkbox" id="dadossensiveis" name="dadossensiveis" value="true" checked>
+                                        @else
+                                        <input type="checkbox" id="dadossensiveis" name="dadossensiveis" value="true">
+                                        @endif                                        
                                         <span class="ml-1">São obtidos dados sensíveis?</span>
                                     </label>
                                 </div>

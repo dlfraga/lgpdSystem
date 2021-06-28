@@ -30,6 +30,9 @@ class Fluxo extends Model {
     //a função abaixo retorna um objeto json truncado para o campo 'informacoes coletadas' com outro nome, a fim de ser utilizado na geração dos gráficos
     //adicionalmente ele troca os carriages return (\r\n) por line breaks (<br>) para que os campos remanescentes apareçam no gráfico corretamente
     getInfocoletadatruncada({informacoescoletadas}){
+        if(informacoescoletadas == null){
+            return;
+        }
         var informacaoColetadaModificada = informacoescoletadas.trim();
         if(informacaoColetadaModificada.length > 15){
             var infotruncada = informacaoColetadaModificada.slice(0, 15);

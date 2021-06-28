@@ -59,7 +59,7 @@ class FluxoController {
 
         var setor = Setor;
         try {
-            setor = await Setor.findOrCreate({ nomedosetor: request.input('setor') });
+            setor = await Setor.findOrCreate({ nomedosetor: request.input('setor') });            
         } catch (error) {
             session.flash({ error: 'Erro no salvamento do setor!' })
             return response.redirect('/meusFluxos')            
