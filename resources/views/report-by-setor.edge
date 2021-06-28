@@ -23,7 +23,7 @@
                 {{--  parent para acessar dados do outerloop --}}                       
                 setor{{$parent.setor.id}}({{$parent.setor.nomedosetor}})--> 
                 |Recebe o|info{{fluxo.id}}({{fluxo.infocoletadatruncada}})--> 
-                |Que vem de|{{ fluxo.fonteDadosFluxo.nome }} -->                 
+                |Que vem de|{{fluxo.fonteDadosFluxo.id}}({{fluxo.fonteDadosFluxo.nome}}) -->                 
                 |Para|nomedoprocesso{{fluxo.id}}({{fluxo.nomedoprocesso}}) -->
                 |Devido a|razao{{fluxo.id}}({{fluxo.razao}}) --> 
                 |Justificativa|justificativa{{fluxo.id}}({{fluxo.justificativa}}) -->
