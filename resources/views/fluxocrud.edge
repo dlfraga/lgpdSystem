@@ -160,16 +160,14 @@
                         </div>
                         <div class="field box">
                             <label class="label" for="">Informações coletadas</label>
-                            <div class="control"><textarea class="textarea" name="informacoescoletadas" rows="3"
-                                    placeholder="Escreva quais são as informações coletadas"
+                            <div class="control">                                    
                                     @if(fluxoaeditar.informacoescoletadas)
-                                    >{{fluxoaeditar.informacoescoletadas}}     
+                                    <textarea class="textarea" name="informacoescoletadas" rows="3">{{fluxoaeditar.informacoescoletadas}}</textarea>
                                     @else
-                                    >                                                                      
-                                    @endif                                    
-                                </textarea>
+                                    <textarea class="textarea" name="informacoescoletadas" rows="3"></textarea>
+                                    @endif                                                                    
                             </div>
-                            <p class="help">Selecione quais são as informações coletadas neste fluxo.</p>
+                            <p class="help">Digite quais informações são coletadas neste fluxo (uma por linha)</p>
                         </div>
 
                         <div class="field box">

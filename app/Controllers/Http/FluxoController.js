@@ -22,8 +22,7 @@ class FluxoController {
             //carregar os relacionamentos junto com o objeto
             await fluxoAtual.loadMany(['user', 'fonteDadosFluxo', 'setor']);
             const fontesDeDados = await FonteDadosFluxo.all();
-            const setores = await Setor.all();
-            console.log(fluxoAtual.toJSON());
+            const setores = await Setor.all();            
             return view.render('editarfluxo', { fluxoaeditar: fluxoAtual.toJSON(), fontesDeDados: fontesDeDados.toJSON(), setores: setores.toJSON() })
             //caso padrao, envia pag 1 com 15 valores
 
@@ -45,6 +44,7 @@ class FluxoController {
 
         if (requestParams.fluxo != null) {
             fluxo = await await Fluxo.find(request.params.fluxo);
+            
         } else {
             fluxo = new Fluxo();
             fluxo.user_id = auth.user.id;
@@ -92,8 +92,7 @@ class FluxoController {
             session.flash({ notification: 'Fluxo salvo com sucesso!' })
             return response.redirect('/meusFluxos')
         } catch (error) {
-            session.flash({ error: 'Erro no salvamento do fluxo!' })
-            console.log(error)
+            session.flash({ error: 'Erro no salvamento do fluxo!' })            
             return response.redirect('/meusFluxos')
         }
 
