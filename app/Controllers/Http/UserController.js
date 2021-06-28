@@ -98,26 +98,27 @@ class UserController {
             //altera o proprio perfil
             if (await this.changeExistingUser(auth.user.id, request, session, response)) {
                 session.flash({ notification: 'Perfil atualizado!' })
-                response.redirect('/dashboard')
+                return response.redirect('/dashboard')
             }
 
-        } else if (params !== auth.user.id) {
+        } else if (params !== auth.user.id) {            
             //alterar o perfil de outra pessoa
-            const currentUser = await User.find(auth.user.id);
+            const currentUser = await User.find(auth.user.id);            
             if (currentUser.is_admin == 1) {
                 if (await this.changeExistingUser(params.id, request, session, response)) {
                     session.flash({ notification: 'Perfil alterado!' })
-                    response.redirect('/administracao')
+                    return response.redirect('/administracao')
                 } else {
+                    response.redirect('/administracao')
                     return 'falha ao alterar o usuario'
                 }
             } else {
                 session.flash({ error: 'Você não pode alterar o perfil de outros usuários!' })
-                response.redirect('/dashboard')
+                return response.redirect('/dashboard')
             }
         } else {            
             if (await this.changeExistingUser(auth.user.id, request, session, response)) {
-                response.redirect('/dashboard')
+                return response.redirect('/dashboard')
             }
         }
         session.flash({ error: 'Erro desconhecido' })        
