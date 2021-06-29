@@ -34,8 +34,8 @@ class Fluxo extends Model {
             return;
         }
         var informacaoColetadaModificada = informacoescoletadas.trim();
-        if(informacaoColetadaModificada.length > 15){
-            var infotruncada = informacaoColetadaModificada.slice(0, 15);
+        if(informacaoColetadaModificada.length > 25){
+            var infotruncada = informacaoColetadaModificada.slice(0, 25);
             infotruncada = infotruncada.replace(/(?:\r\n|\r|\n)/g, '<br>');
             infotruncada += "..."
             return infotruncada.replace(/^(.)|\s(.)/g, ($1) => {
