@@ -10,8 +10,8 @@ class UserController {
         } catch (error) {            
             const newAdmin = new User();
             newAdmin.username = 'Admin';
-            newAdmin.password = 'Dip123rudp'
-            newAdmin.email = 'daniel2k787@gmail.com'
+            newAdmin.password = 'xxxxxxxxx'
+            newAdmin.email = 'das@das.com'
             newAdmin.is_admin = 1;
             await newAdmin.save();
             session.flash({ notification: 'Nenhum login no sistema! Criado admin padrão' })
